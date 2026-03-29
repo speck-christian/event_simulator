@@ -52,6 +52,11 @@ def main() -> None:
     args = parse_args()
     overall_start = time.perf_counter()
     data_start = time.perf_counter()
+    print(
+        f"[train_learned] loading runs: train={args.train_runs} eval={args.eval_runs} "
+        f"duration={args.duration}s control={args.control_mode} profile={args.simulation_profile}",
+        flush=True,
+    )
     cache_dir = args.cache_dir or f"analysis/cache_colab_{args.control_mode}_{args.simulation_profile}"
     runs = load_or_generate_runs(
         args.train_runs + args.eval_runs,
@@ -62,6 +67,7 @@ def main() -> None:
         simulation_profile=args.simulation_profile,
     )
     data_seconds = time.perf_counter() - data_start
+    print(f"[train_learned] runs ready in {data_seconds:.1f}s from {cache_dir}", flush=True)
     train_runs = runs[: args.train_runs]
     eval_runs = runs[args.train_runs :]
     available_models = {
@@ -99,12 +105,21 @@ def main() -> None:
     timing_outputs: dict[str, dict[str, float]] = {}
     for name in selected_names:
         model = available_models[name]
+        print(f"[train_learned] fitting {name} on device={args.device}", flush=True)
         fit_start = time.perf_counter()
         model.fit(train_runs)
         fit_seconds = time.perf_counter() - fit_start
+        print(f"[train_learned] finished fitting {name} in {fit_seconds:.1f}s", flush=True)
+        print(f"[train_learned] evaluating {name}", flush=True)
         eval_start = time.perf_counter()
-        metrics, example_predictions, long_horizon = evaluate_model(model, eval_runs)
+        metrics, example_predictions, long_horizon = evaluate_model(
+            model,
+            eval_runs,
+            log_progress=True,
+            progress_prefix=name,
+        )
         eval_seconds = time.perf_counter() - eval_start
+        print(f"[train_learned] finished evaluating {name} in {eval_seconds:.1f}s", flush=True)
         model_outputs[model.name] = {
             "description": model.description,
             "metrics": metrics,
@@ -125,12 +140,14 @@ def main() -> None:
     (output_dir / "model_comparison.json").write_text(json.dumps(report, indent=2) + "\n")
     (output_dir / "model_comparison.html").write_text(build_dashboard_html(report))
     (output_dir / "traffic_predictions.html").write_text(build_prediction_dashboard_html(report, eval_runs[0], cached_runs=eval_runs))
+    print(f"[train_learned] wrote reports to {output_dir}", flush=True)
     checkpoint_manifest: dict[str, str] = {}
     for name in selected_names:
         model = available_models[name]
         checkpoint_path = checkpoint_dir / f"{name}.pt"
         model.save_checkpoint(checkpoint_path)
         checkpoint_manifest[name] = str(checkpoint_path)
+        print(f"[train_learned] saved checkpoint for {name} to {checkpoint_path}", flush=True)
     overall_seconds = time.perf_counter() - overall_start
     runtime_report = {
         "device": args.device,

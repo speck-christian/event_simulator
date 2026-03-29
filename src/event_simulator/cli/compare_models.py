@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+import time
 
 from event_simulator.evaluation import (
     build_dashboard_html,
@@ -60,6 +61,11 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    print(
+        f"[compare_models] loading runs: train={args.train_runs} eval={args.eval_runs} "
+        f"duration={args.duration}s control={args.control_mode} profile={args.simulation_profile}",
+        flush=True,
+    )
     cache_dir = args.cache_dir or f"analysis/cache_{args.control_mode}_{args.simulation_profile}"
     runs = load_or_generate_runs(
         args.train_runs + args.eval_runs,
@@ -69,6 +75,7 @@ def main() -> None:
         control_mode=args.control_mode,
         simulation_profile=args.simulation_profile,
     )
+    print(f"[compare_models] runs ready from {cache_dir}", flush=True)
     train_runs = runs[: args.train_runs]
     eval_runs = runs[args.train_runs :]
     available_models = {
@@ -91,8 +98,18 @@ def main() -> None:
     model_outputs: dict[str, dict] = {}
     for name in selected_names:
         model = available_models[name]
+        print(f"[compare_models] fitting {name}", flush=True)
+        fit_start = time.perf_counter()
         model.fit(train_runs)
-        metrics, example_predictions, long_horizon = evaluate_model(model, eval_runs)
+        print(f"[compare_models] finished fitting {name} in {time.perf_counter() - fit_start:.1f}s", flush=True)
+        print(f"[compare_models] evaluating {name}", flush=True)
+        metrics, example_predictions, long_horizon = evaluate_model(
+            model,
+            eval_runs,
+            log_progress=True,
+            progress_prefix=name,
+        )
+        print(f"[compare_models] finished evaluating {name}", flush=True)
         model_outputs[model.name] = {
             "description": model.description,
             "metrics": metrics,
@@ -108,8 +125,10 @@ def main() -> None:
     (output_dir / "model_comparison.json").write_text(json.dumps(report, indent=2) + "\n")
     (output_dir / "model_comparison.html").write_text(build_dashboard_html(report))
     (output_dir / "traffic_predictions.html").write_text(build_prediction_dashboard_html(report, eval_runs[0], cached_runs=eval_runs))
+    print(f"[compare_models] wrote reports to {output_dir}", flush=True)
     for name in selected_names:
         model = available_models[name]
         if hasattr(model, "save_checkpoint") and model.name in {"neural_tpp", "multitask_neural_tpp", "continuous_tpp", "transformer_tpp"}:
             model.save_checkpoint(checkpoint_dir / f"{model.name}.pt")
+            print(f"[compare_models] saved checkpoint for {model.name}", flush=True)
     print(json.dumps({name: output["metrics"] for name, output in model_outputs.items()}, indent=2))

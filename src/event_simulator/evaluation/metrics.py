@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 import math
+import time
 import statistics
 from typing import Any
 
@@ -221,7 +222,13 @@ def actual_state_until_time(
     return rolled_state
 
 
-def evaluate_model(model: Predictor, eval_runs: list[dict[str, Any]]) -> tuple[dict[str, Any], list[dict[str, Any]], dict[str, Any]]:
+def evaluate_model(
+    model: Predictor,
+    eval_runs: list[dict[str, Any]],
+    *,
+    log_progress: bool = False,
+    progress_prefix: str | None = None,
+) -> tuple[dict[str, Any], list[dict[str, Any]], dict[str, Any]]:
     all_predictions: list[dict[str, Any]] = []
     example_predictions: list[dict[str, Any]] = []
     example_time_condition_predictions: list[dict[str, Any]] = []
@@ -244,10 +251,21 @@ def evaluate_model(model: Predictor, eval_runs: list[dict[str, Any]]) -> tuple[d
         horizon: defaultdict(lambda: {"type_correct": 0, "family_correct": 0, "time_abs_error": [], "count": 0})
         for horizon in rollout_horizons
     }
+    prefix = progress_prefix or getattr(model, "name", model.__class__.__name__)
+    if log_progress:
+        print(f"[eval] {prefix}: starting evaluation on {len(eval_runs)} runs", flush=True)
+    eval_started_at = time.perf_counter()
 
     for run_index, run in enumerate(eval_runs):
+        run_started_at = time.perf_counter()
         state = ReplayState()
         events = run["events"]
+        if log_progress:
+            print(
+                f"[eval] {prefix}: run {run_index + 1}/{len(eval_runs)} "
+                f"(seed={run.get('seed', 'n/a')}, events={len(events)})",
+                flush=True,
+            )
         for event_index, (current_event, actual_next_event) in enumerate(zip(events, events[1:])):
             state.update(current_event, run["summary"])
             predicted_label, predicted_time = model.predict(state, run["summary"])
@@ -363,6 +381,12 @@ def evaluate_model(model: Predictor, eval_runs: list[dict[str, Any]]) -> tuple[d
                 )
                 accumulate_calibration_bins(calibration_bins, predicted_score_map, condition_flags(actual_state))
                 accumulate_condition_calibration_bins(condition_calibration_bins, predicted_score_map, condition_flags(actual_state))
+        if log_progress:
+            print(
+                f"[eval] {prefix}: completed run {run_index + 1}/{len(eval_runs)} "
+                f"in {time.perf_counter() - run_started_at:.1f}s",
+                flush=True,
+            )
 
     metrics = {
         "type_accuracy": round(sum(item["label_correct"] for item in all_predictions) / len(all_predictions), 4),
@@ -405,6 +429,8 @@ def evaluate_model(model: Predictor, eval_runs: list[dict[str, Any]]) -> tuple[d
         for horizon in time_condition_horizons
     }
     metrics["per_family"] = per_family_metrics
+    if log_progress:
+        print(f"[eval] {prefix}: finished in {time.perf_counter() - eval_started_at:.1f}s", flush=True)
     return metrics, example_predictions, {
         "rollout": rollout_metrics,
         "time_conditions": time_condition_metrics,
