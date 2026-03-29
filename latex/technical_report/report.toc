@@ -1,0 +1,16 @@
+\contentsline {section}{\numberline {1}Scope}{2}{section.1}%
+\contentsline {section}{\numberline {2}Application and Simulation Design}{2}{section.2}%
+\contentsline {section}{\numberline {3}Model Families}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Empirical and Mechanistic Baselines}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Learned Temporal Models}{5}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Learning Objectives}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Condition Calibration}{9}{subsection.4.1}%
+\contentsline {section}{\numberline {5}Evaluation}{11}{section.5}%
+\contentsline {section}{\numberline {6}Results}{14}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Primary Benchmark: Adaptive 60/20}{14}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Fixed-Horizon Condition Forecasting}{16}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Baseline Simulator vs Richer Simulator at the Same Scale}{17}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Fixed vs Adaptive at the Same Scale}{19}{subsection.6.4}%
+\contentsline {section}{\numberline {7}Interpretation}{21}{section.7}%
+\contentsline {section}{\numberline {8}Limitations and Next Steps}{22}{section.8}%
+\contentsline {section}{\numberline {9}Conclusion}{23}{section.9}%

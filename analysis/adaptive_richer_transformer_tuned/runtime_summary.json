@@ -1,0 +1,19 @@
+{
+  "device": "cpu",
+  "train_runs": 60,
+  "eval_runs": 20,
+  "duration_seconds": 300,
+  "control_mode": "adaptive",
+  "simulation_profile": "richer",
+  "epochs": 14,
+  "batch_size": 128,
+  "data_prep_seconds": 0.041,
+  "total_wall_seconds": 617.712,
+  "models": {
+    "transformer_tpp": {
+      "fit_seconds": 599.467,
+      "eval_seconds": 18.193,
+      "total_seconds": 617.66
+    }
+  }
+}

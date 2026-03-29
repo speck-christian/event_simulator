@@ -1,0 +1,17 @@
+{
+  "device": "cpu",
+  "train_runs": 4,
+  "eval_runs": 1,
+  "duration_seconds": 120,
+  "epochs": 1,
+  "batch_size": 128,
+  "data_prep_seconds": 0.005,
+  "total_wall_seconds": 3.511,
+  "models": {
+    "neural_tpp": {
+      "fit_seconds": 0.849,
+      "eval_seconds": 2.653,
+      "total_seconds": 3.502
+    }
+  }
+}

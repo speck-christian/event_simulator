@@ -1,0 +1,40 @@
+{
+  "device": "cpu",
+  "train_runs": 60,
+  "eval_runs": 20,
+  "duration_seconds": 300,
+  "control_mode": "adaptive",
+  "simulation_profile": "richer",
+  "epochs": 14,
+  "batch_size": 128,
+  "data_prep_seconds": 0.029,
+  "total_wall_seconds": 1541.169,
+  "models": {
+    "neural_tpp": {
+      "fit_seconds": 84.653,
+      "eval_seconds": 68.17,
+      "total_seconds": 152.823
+    },
+    "multitask_neural_tpp": {
+      "fit_seconds": 181.381,
+      "eval_seconds": 31.277,
+      "total_seconds": 212.658
+    },
+    "continuous_tpp": {
+      "fit_seconds": 301.301,
+      "eval_seconds": 103.543,
+      "total_seconds": 404.844
+    },
+    "transformer_tpp": {
+      "fit_seconds": 737.205,
+      "eval_seconds": 31.21,
+      "total_seconds": 768.414
+    }
+  },
+  "checkpoints": {
+    "neural_tpp": "analysis/adaptive_richer_60_20_rebalanced_learned/checkpoints/neural_tpp.pt",
+    "multitask_neural_tpp": "analysis/adaptive_richer_60_20_rebalanced_learned/checkpoints/multitask_neural_tpp.pt",
+    "continuous_tpp": "analysis/adaptive_richer_60_20_rebalanced_learned/checkpoints/continuous_tpp.pt",
+    "transformer_tpp": "analysis/adaptive_richer_60_20_rebalanced_learned/checkpoints/transformer_tpp.pt"
+  }
+}

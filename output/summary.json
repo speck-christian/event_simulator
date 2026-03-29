@@ -1,0 +1,40 @@
+{
+  "duration_seconds": 300,
+  "signal_plan": {
+    "NS_GREEN": 30,
+    "ALL_RED": 4,
+    "EW_GREEN": 25,
+    "service_headway_seconds": 2
+  },
+  "lanes": {
+    "north": {
+      "arrivals": 79,
+      "departures": 65,
+      "queue_remaining": 14,
+      "max_queue": 19,
+      "average_wait_seconds": 32.07
+    },
+    "south": {
+      "arrivals": 72,
+      "departures": 63,
+      "queue_remaining": 9,
+      "max_queue": 18,
+      "average_wait_seconds": 40.03
+    },
+    "east": {
+      "arrivals": 57,
+      "departures": 54,
+      "queue_remaining": 3,
+      "max_queue": 15,
+      "average_wait_seconds": 28.75
+    },
+    "west": {
+      "arrivals": 39,
+      "departures": 39,
+      "queue_remaining": 0,
+      "max_queue": 11,
+      "average_wait_seconds": 20.77
+    }
+  },
+  "events_recorded": 487
+}

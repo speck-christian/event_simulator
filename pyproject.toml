@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "event-simulator"
+version = "0.1.0"
+description = "Traffic intersection simulation and event forecasting experiments"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+ml = ["torch>=2.2", "numpy>=1.26"]
+colab = ["torch>=2.2", "numpy>=1.26", "ipykernel>=6.29", "matplotlib>=3.8"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,78 @@
+{
+  "duration_seconds": 120,
+  "control_mode": "adaptive",
+  "simulation_profile": "baseline",
+  "signal_plan": {
+    "NS_GREEN": 35.9,
+    "ALL_RED": 4.0,
+    "EW_GREEN": 36.3,
+    "service_headway_seconds": 2.0,
+    "lane_service_headway_seconds": {
+      "north": 2.0,
+      "south": 2.0,
+      "east": 2.0,
+      "west": 2.0
+    },
+    "green_control": {
+      "mode": "queue_and_arrival_rate_responsive",
+      "min_green_seconds": 12,
+      "max_green_seconds": 45,
+      "queue_weight_seconds": 1.3,
+      "arrival_weight_seconds": 0.2,
+      "base_green_seconds": {
+        "NS_GREEN": 30,
+        "EW_GREEN": 25
+      }
+    },
+    "arrival_process": {
+      "profile": "stationary_poisson"
+    }
+  },
+  "lanes": {
+    "north": {
+      "arrival_rate_per_minute": 16,
+      "service_headway_seconds": 2.0,
+      "turn_share": 0.0,
+      "burst_probability": 0.0,
+      "arrivals": 29,
+      "departures": 27,
+      "queue_remaining": 2,
+      "max_queue": 15,
+      "average_wait_seconds": 24.2
+    },
+    "south": {
+      "arrival_rate_per_minute": 14,
+      "service_headway_seconds": 2.0,
+      "turn_share": 0.0,
+      "burst_probability": 0.0,
+      "arrivals": 34,
+      "departures": 29,
+      "queue_remaining": 5,
+      "max_queue": 13,
+      "average_wait_seconds": 24.77
+    },
+    "east": {
+      "arrival_rate_per_minute": 10,
+      "service_headway_seconds": 2.0,
+      "turn_share": 0.0,
+      "burst_probability": 0.0,
+      "arrivals": 26,
+      "departures": 11,
+      "queue_remaining": 15,
+      "max_queue": 15,
+      "average_wait_seconds": 9.88
+    },
+    "west": {
+      "arrival_rate_per_minute": 8,
+      "service_headway_seconds": 2.0,
+      "turn_share": 0.0,
+      "burst_probability": 0.0,
+      "arrivals": 21,
+      "departures": 13,
+      "queue_remaining": 8,
+      "max_queue": 10,
+      "average_wait_seconds": 23.62
+    }
+  },
+  "events_recorded": 196
+}

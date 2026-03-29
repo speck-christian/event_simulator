@@ -1,0 +1,5214 @@
+{
+  "train_runs": 4,
+  "eval_runs": 1,
+  "duration_seconds": 120,
+  "example_seed": 104,
+  "actual_events": [
+    {
+      "time_s": 1.937,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 4.948,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 7.898,
+      "label": "vehicle_arrival:east"
+    },
+    {
+      "time_s": 8.806,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 8.878,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 9.659,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 10.806,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 12.067,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 12.538,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 12.806,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 14.067,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 14.331,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 14.806,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 16.067,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 16.533,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 17.331,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 17.76,
+      "label": "vehicle_arrival:east"
+    },
+    {
+      "time_s": 18.533,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 19.335,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 20.422,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 21.335,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 21.462,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 21.881,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 22.422,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 22.987,
+      "label": "vehicle_arrival:east"
+    },
+    {
+      "time_s": 23.462,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 24.422,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 25.592,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 25.625,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 26.148,
+      "label": "vehicle_arrival:east"
+    },
+    {
+      "time_s": 27.592,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 27.625,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 27.941,
+      "label": "vehicle_arrival:east"
+    },
+    {
+      "time_s": 27.947,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 28.918,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 29.13,
+      "label": "vehicle_arrival:east"
+    },
+    {
+      "time_s": 29.371,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 29.947,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 30.0,
+      "label": "phase_change:ALL_RED"
+    },
+    {
+      "time_s": 31.1,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 32.2,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 34.0,
+      "label": "phase_change:EW_GREEN"
+    },
+    {
+      "time_s": 34.38,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 34.594,
+      "label": "vehicle_arrival:east"
+    },
+    {
+      "time_s": 36.0,
+      "label": "vehicle_departure:east"
+    },
+    {
+      "time_s": 36.0,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 36.308,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 37.702,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 38.0,
+      "label": "vehicle_departure:east"
+    },
+    {
+      "time_s": 38.0,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 38.153,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 38.399,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 39.109,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 39.288,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 40.0,
+      "label": "vehicle_departure:east"
+    },
+    {
+      "time_s": 40.0,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 42.0,
+      "label": "vehicle_departure:east"
+    },
+    {
+      "time_s": 42.0,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 44.0,
+      "label": "vehicle_departure:east"
+    },
+    {
+      "time_s": 44.0,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 44.009,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 46.0,
+      "label": "vehicle_departure:east"
+    },
+    {
+      "time_s": 46.0,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 48.0,
+      "label": "vehicle_departure:east"
+    },
+    {
+      "time_s": 48.0,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 50.009,
+      "label": "vehicle_arrival:east"
+    },
+    {
+      "time_s": 51.027,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 52.009,
+      "label": "vehicle_departure:east"
+    },
+    {
+      "time_s": 52.178,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 54.178,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 54.768,
+      "label": "vehicle_arrival:east"
+    },
+    {
+      "time_s": 55.319,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 55.607,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 56.166,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 56.341,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 56.768,
+      "label": "vehicle_departure:east"
+    },
+    {
+      "time_s": 58.379,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 58.38,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 59.0,
+      "label": "phase_change:ALL_RED"
+    },
+    {
+      "time_s": 59.035,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 59.051,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 59.429,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 60.146,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 60.188,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 62.711,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 63.0,
+      "label": "phase_change:NS_GREEN"
+    },
+    {
+      "time_s": 63.759,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 64.04,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 65.0,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 65.0,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 67.0,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 67.0,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 67.386,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 67.679,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 69.0,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 69.0,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 70.559,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 71.0,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 71.0,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 71.413,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 72.805,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 73.0,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 73.0,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 74.281,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 75.0,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 75.0,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 75.674,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 76.505,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 77.0,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 77.0,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 78.254,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 79.0,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 79.0,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 81.0,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 81.0,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 82.608,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 83.0,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 83.0,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 85.0,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 85.0,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 85.383,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 86.625,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 87.0,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 87.0,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 88.399,
+      "label": "vehicle_arrival:east"
+    },
+    {
+      "time_s": 89.0,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 89.0,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 89.763,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 90.905,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 91.0,
+      "label": "vehicle_departure:south"
+    },
+    {
+      "time_s": 92.832,
+      "label": "vehicle_arrival:east"
+    },
+    {
+      "time_s": 92.905,
+      "label": "vehicle_departure:north"
+    },
+    {
+      "time_s": 93.0,
+      "label": "phase_change:ALL_RED"
+    },
+    {
+      "time_s": 93.002,
+      "label": "vehicle_arrival:east"
+    },
+    {
+      "time_s": 94.149,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 94.982,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 95.433,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 97.0,
+      "label": "phase_change:EW_GREEN"
+    },
+    {
+      "time_s": 97.466,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 97.833,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 98.014,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 99.0,
+      "label": "vehicle_departure:east"
+    },
+    {
+      "time_s": 99.0,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 99.111,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 101.0,
+      "label": "vehicle_departure:east"
+    },
+    {
+      "time_s": 101.0,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 101.071,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 101.839,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 103.0,
+      "label": "vehicle_departure:east"
+    },
+    {
+      "time_s": 103.0,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 103.408,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 104.623,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 105.0,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 106.974,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 107.93,
+      "label": "vehicle_arrival:east"
+    },
+    {
+      "time_s": 109.93,
+      "label": "vehicle_departure:east"
+    },
+    {
+      "time_s": 111.313,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 111.362,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 111.69,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 113.469,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 113.69,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 114.802,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 115.69,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 116.376,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 116.617,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 116.953,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 117.215,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 117.69,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 117.819,
+      "label": "vehicle_arrival:west"
+    },
+    {
+      "time_s": 117.842,
+      "label": "vehicle_arrival:north"
+    },
+    {
+      "time_s": 118.337,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 118.71,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 119.07,
+      "label": "vehicle_arrival:east"
+    },
+    {
+      "time_s": 119.407,
+      "label": "vehicle_arrival:east"
+    },
+    {
+      "time_s": 119.667,
+      "label": "vehicle_arrival:south"
+    },
+    {
+      "time_s": 119.819,
+      "label": "vehicle_departure:west"
+    },
+    {
+      "time_s": 119.971,
+      "label": "vehicle_arrival:west"
+    }
+  ],
+  "models": {
+    "global_rate": {
+      "description": "Global empirical recurrence times per event label",
+      "metrics": {
+        "type_accuracy": 0.113,
+        "family_accuracy": 0.2825,
+        "time_mae": 0.6576,
+        "time_rmse": 0.9322,
+        "within_2s": 0.9718,
+        "predictions": 177,
+        "per_family": {
+          "phase_change": {
+            "type_accuracy": 0.3333,
+            "family_accuracy": 0.5,
+            "time_mae": 0.6873,
+            "predictions": 6
+          },
+          "vehicle_arrival": {
+            "type_accuracy": 0.1386,
+            "family_accuracy": 0.4158,
+            "time_mae": 0.6708,
+            "predictions": 101
+          },
+          "vehicle_departure": {
+            "type_accuracy": 0.0571,
+            "family_accuracy": 0.0714,
+            "time_mae": 0.6362,
+            "predictions": 70
+          }
+        }
+      },
+      "example_predictions": [
+        {
+          "run_index": 0,
+          "context_time": 0.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 3.283,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 1.937,
+          "abs_time_error": 1.346,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 1.937,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 5.22,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 4.948,
+          "abs_time_error": 0.272,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 4.948,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 8.231,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 7.898,
+          "abs_time_error": 0.333,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 7.898,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 11.181,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 8.806,
+          "abs_time_error": 2.375,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 8.806,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 12.089,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 8.878,
+          "abs_time_error": 3.211,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 8.878,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 12.161,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 9.659,
+          "abs_time_error": 2.502,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 9.659,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 12.942,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 10.806,
+          "abs_time_error": 2.136,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 10.806,
+          "predicted_label": "vehicle_arrival:west",
+          "predicted_time": 12.954,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 12.067,
+          "abs_time_error": 0.887,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 12.067,
+          "predicted_label": "vehicle_arrival:west",
+          "predicted_time": 12.954,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 12.538,
+          "abs_time_error": 0.416,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 12.538,
+          "predicted_label": "vehicle_arrival:west",
+          "predicted_time": 12.954,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 12.806,
+          "abs_time_error": 0.148,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 12.806,
+          "predicted_label": "vehicle_arrival:west",
+          "predicted_time": 12.954,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 14.067,
+          "abs_time_error": 1.113,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 14.067,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 14.117,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 14.331,
+          "abs_time_error": 0.214,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 14.331,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 14.381,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 14.806,
+          "abs_time_error": 0.425,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 14.806,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 14.856,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 16.067,
+          "abs_time_error": 1.211,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 16.067,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 16.117,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 16.533,
+          "abs_time_error": 0.416,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 16.533,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 16.583,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 17.331,
+          "abs_time_error": 0.748,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 17.331,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 17.381,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 17.76,
+          "abs_time_error": 0.379,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 17.76,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 17.81,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 18.533,
+          "abs_time_error": 0.723,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 18.533,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 18.583,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 19.335,
+          "abs_time_error": 0.752,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 19.335,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 19.385,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 20.422,
+          "abs_time_error": 1.037,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 20.422,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 20.472,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 21.335,
+          "abs_time_error": 0.863,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 21.335,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 22.538,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 21.462,
+          "abs_time_error": 1.076,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 21.462,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 22.538,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 21.881,
+          "abs_time_error": 0.657,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 21.881,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 22.538,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 22.422,
+          "abs_time_error": 0.116,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 22.422,
+          "predicted_label": "vehicle_arrival:east",
+          "predicted_time": 23.537,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 22.987,
+          "abs_time_error": 0.55,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 22.987,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 24.959,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 23.462,
+          "abs_time_error": 1.497,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 23.462,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 24.959,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 24.422,
+          "abs_time_error": 0.537,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 24.422,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 24.959,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 25.592,
+          "abs_time_error": 0.633,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 25.592,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 25.642,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 25.625,
+          "abs_time_error": 0.017,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 25.625,
+          "predicted_label": "vehicle_arrival:west",
+          "predicted_time": 25.675,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 26.148,
+          "abs_time_error": 0.473,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 26.148,
+          "predicted_label": "vehicle_arrival:west",
+          "predicted_time": 26.198,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 27.592,
+          "abs_time_error": 1.394,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 27.592,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 27.642,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 27.625,
+          "abs_time_error": 0.017,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 27.625,
+          "predicted_label": "vehicle_arrival:west",
+          "predicted_time": 27.675,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 27.941,
+          "abs_time_error": 0.266,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 27.941,
+          "predicted_label": "vehicle_arrival:west",
+          "predicted_time": 27.991,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 27.947,
+          "abs_time_error": 0.044,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 27.947,
+          "predicted_label": "vehicle_arrival:west",
+          "predicted_time": 27.997,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 28.918,
+          "abs_time_error": 0.921,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 28.918,
+          "predicted_label": "vehicle_arrival:west",
+          "predicted_time": 28.968,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 29.13,
+          "abs_time_error": 0.162,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 29.13,
+          "predicted_label": "vehicle_arrival:west",
+          "predicted_time": 29.18,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 29.371,
+          "abs_time_error": 0.191,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 29.371,
+          "predicted_label": "vehicle_arrival:west",
+          "predicted_time": 29.421,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 29.947,
+          "abs_time_error": 0.526,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 29.947,
+          "predicted_label": "vehicle_arrival:west",
+          "predicted_time": 29.997,
+          "actual_label": "phase_change:ALL_RED",
+          "actual_time": 30.0,
+          "abs_time_error": 0.003,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 30.0,
+          "predicted_label": "vehicle_arrival:west",
+          "predicted_time": 30.05,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 31.1,
+          "abs_time_error": 1.05,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 31.1,
+          "predicted_label": "vehicle_arrival:west",
+          "predicted_time": 31.15,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 32.2,
+          "abs_time_error": 1.05,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 32.2,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 32.25,
+          "actual_label": "phase_change:EW_GREEN",
+          "actual_time": 34.0,
+          "abs_time_error": 1.75,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 34.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 34.05,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 34.38,
+          "abs_time_error": 0.33,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 34.38,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 34.43,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 34.594,
+          "abs_time_error": 0.164,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 34.594,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 34.644,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 36.0,
+          "abs_time_error": 1.356,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 36.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 36.05,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 36.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 36.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 36.05,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 36.308,
+          "abs_time_error": 0.258,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 36.308,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 36.358,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 37.702,
+          "abs_time_error": 1.344,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 37.702,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 37.752,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 38.0,
+          "abs_time_error": 0.248,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 38.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 38.05,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 38.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 38.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 38.05,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 38.153,
+          "abs_time_error": 0.103,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 38.153,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 38.203,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 38.399,
+          "abs_time_error": 0.196,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 38.399,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 38.449,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 39.109,
+          "abs_time_error": 0.66,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 39.109,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 39.159,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 39.288,
+          "abs_time_error": 0.129,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 39.288,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 39.338,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 40.0,
+          "abs_time_error": 0.662,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 40.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 40.05,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 40.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 40.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 40.05,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 42.0,
+          "abs_time_error": 1.95,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 42.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 42.05,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 42.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 42.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 42.05,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 44.0,
+          "abs_time_error": 1.95,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 44.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 44.05,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 44.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 44.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 44.05,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 44.009,
+          "abs_time_error": 0.041,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 44.009,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 44.059,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 46.0,
+          "abs_time_error": 1.941,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 46.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 46.05,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 46.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 46.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 46.05,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 48.0,
+          "abs_time_error": 1.95,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 48.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 48.05,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 48.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 48.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 48.05,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 50.009,
+          "abs_time_error": 1.959,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 50.009,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 50.059,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 51.027,
+          "abs_time_error": 0.968,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 51.027,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 51.077,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 52.009,
+          "abs_time_error": 0.932,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 52.009,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 52.059,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 52.178,
+          "abs_time_error": 0.119,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 52.178,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 52.228,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 54.178,
+          "abs_time_error": 1.95,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 54.178,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 54.228,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 54.768,
+          "abs_time_error": 0.54,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 54.768,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 54.818,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 55.319,
+          "abs_time_error": 0.501,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 55.319,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 55.369,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 55.607,
+          "abs_time_error": 0.238,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 55.607,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 55.657,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 56.166,
+          "abs_time_error": 0.509,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 56.166,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 56.216,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 56.341,
+          "abs_time_error": 0.125,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 56.341,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 56.391,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 56.768,
+          "abs_time_error": 0.377,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 56.768,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 56.818,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 58.379,
+          "abs_time_error": 1.561,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 58.379,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 58.429,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 58.38,
+          "abs_time_error": 0.049,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 58.38,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 58.43,
+          "actual_label": "phase_change:ALL_RED",
+          "actual_time": 59.0,
+          "abs_time_error": 0.57,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 59.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 59.05,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 59.035,
+          "abs_time_error": 0.015,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 59.035,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 59.085,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 59.051,
+          "abs_time_error": 0.034,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 59.051,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 59.101,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 59.429,
+          "abs_time_error": 0.328,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 59.429,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 59.479,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 60.146,
+          "abs_time_error": 0.667,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 60.146,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 60.196,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 60.188,
+          "abs_time_error": 0.008,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 60.188,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 60.238,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 62.711,
+          "abs_time_error": 2.473,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 62.711,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 62.761,
+          "actual_label": "phase_change:NS_GREEN",
+          "actual_time": 63.0,
+          "abs_time_error": 0.239,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 63.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 63.05,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 63.759,
+          "abs_time_error": 0.709,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 63.759,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 63.809,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 64.04,
+          "abs_time_error": 0.231,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 64.04,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 64.09,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 65.0,
+          "abs_time_error": 0.91,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 65.0,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 65.05,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 65.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 65.0,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 65.05,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 67.0,
+          "abs_time_error": 1.95,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 67.0,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 67.05,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 67.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 67.0,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 67.05,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 67.386,
+          "abs_time_error": 0.336,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 67.386,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 67.436,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 67.679,
+          "abs_time_error": 0.243,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 67.679,
+          "predicted_label": "vehicle_arrival:east",
+          "predicted_time": 67.729,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 69.0,
+          "abs_time_error": 1.271,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 69.0,
+          "predicted_label": "vehicle_arrival:east",
+          "predicted_time": 69.05,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 69.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 69.0,
+          "predicted_label": "vehicle_arrival:east",
+          "predicted_time": 69.05,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 70.559,
+          "abs_time_error": 1.509,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 70.559,
+          "predicted_label": "vehicle_arrival:east",
+          "predicted_time": 70.609,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 71.0,
+          "abs_time_error": 0.391,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 71.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 71.05,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 71.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 71.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 71.05,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 71.413,
+          "abs_time_error": 0.363,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 71.413,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 71.463,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 72.805,
+          "abs_time_error": 1.342,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 72.805,
+          "predicted_label": "vehicle_arrival:east",
+          "predicted_time": 72.855,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 73.0,
+          "abs_time_error": 0.145,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 73.0,
+          "predicted_label": "vehicle_arrival:east",
+          "predicted_time": 73.05,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 73.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 73.0,
+          "predicted_label": "vehicle_arrival:east",
+          "predicted_time": 73.05,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 74.281,
+          "abs_time_error": 1.231,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 74.281,
+          "predicted_label": "vehicle_arrival:east",
+          "predicted_time": 74.331,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 75.0,
+          "abs_time_error": 0.669,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 75.0,
+          "predicted_label": "vehicle_arrival:east",
+          "predicted_time": 75.05,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 75.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 75.0,
+          "predicted_label": "vehicle_arrival:east",
+          "predicted_time": 75.05,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 75.674,
+          "abs_time_error": 0.624,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 75.674,
+          "predicted_label": "vehicle_arrival:east",
+          "predicted_time": 75.724,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 76.505,
+          "abs_time_error": 0.781,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 76.505,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 76.555,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 77.0,
+          "abs_time_error": 0.445,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 77.0,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 77.05,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 77.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 77.0,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 77.05,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 78.254,
+          "abs_time_error": 1.204,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 78.254,
+          "predicted_label": "vehicle_arrival:east",
+          "predicted_time": 78.304,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 79.0,
+          "abs_time_error": 0.696,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 79.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 79.05,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 79.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 79.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 79.05,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 81.0,
+          "abs_time_error": 1.95,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 81.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 81.05,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 81.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 81.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 81.05,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 82.608,
+          "abs_time_error": 1.558,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 82.608,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 82.658,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 83.0,
+          "abs_time_error": 0.342,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 83.0,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 83.05,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 83.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 83.0,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 83.05,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 85.0,
+          "abs_time_error": 1.95,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 85.0,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 85.05,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 85.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 85.0,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 85.05,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 85.383,
+          "abs_time_error": 0.333,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 85.383,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 85.433,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 86.625,
+          "abs_time_error": 1.192,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 86.625,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 86.675,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 87.0,
+          "abs_time_error": 0.325,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 87.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 87.05,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 87.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 87.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 87.05,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 88.399,
+          "abs_time_error": 1.349,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 88.399,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 88.449,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 89.0,
+          "abs_time_error": 0.551,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 89.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 89.05,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 89.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 89.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 89.05,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 89.763,
+          "abs_time_error": 0.713,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 89.763,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 89.813,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 90.905,
+          "abs_time_error": 1.092,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 90.905,
+          "predicted_label": "phase_change:ALL_RED",
+          "predicted_time": 90.955,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 91.0,
+          "abs_time_error": 0.045,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 91.0,
+          "predicted_label": "phase_change:ALL_RED",
+          "predicted_time": 91.05,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 92.832,
+          "abs_time_error": 1.782,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 92.832,
+          "predicted_label": "phase_change:ALL_RED",
+          "predicted_time": 92.882,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 92.905,
+          "abs_time_error": 0.023,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 92.905,
+          "predicted_label": "phase_change:ALL_RED",
+          "predicted_time": 92.955,
+          "actual_label": "phase_change:ALL_RED",
+          "actual_time": 93.0,
+          "abs_time_error": 0.045,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 93.0,
+          "predicted_label": "phase_change:EW_GREEN",
+          "predicted_time": 93.05,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 93.002,
+          "abs_time_error": 0.048,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 93.002,
+          "predicted_label": "phase_change:EW_GREEN",
+          "predicted_time": 93.052,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 94.149,
+          "abs_time_error": 1.097,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 94.149,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 94.199,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 94.982,
+          "abs_time_error": 0.783,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 94.982,
+          "predicted_label": "vehicle_arrival:south",
+          "predicted_time": 95.032,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 95.433,
+          "abs_time_error": 0.401,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 95.433,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 95.483,
+          "actual_label": "phase_change:EW_GREEN",
+          "actual_time": 97.0,
+          "abs_time_error": 1.517,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 97.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 97.05,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 97.466,
+          "abs_time_error": 0.416,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 97.466,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 97.516,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 97.833,
+          "abs_time_error": 0.317,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 97.833,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 97.883,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 98.014,
+          "abs_time_error": 0.131,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 98.014,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 98.064,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 99.0,
+          "abs_time_error": 0.936,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 99.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 99.05,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 99.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 99.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 99.05,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 99.111,
+          "abs_time_error": 0.061,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 99.111,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 99.161,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 101.0,
+          "abs_time_error": 1.839,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 101.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 101.05,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 101.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 101.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 101.05,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 101.071,
+          "abs_time_error": 0.021,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 101.071,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 101.121,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 101.839,
+          "abs_time_error": 0.718,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 101.839,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 101.889,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 103.0,
+          "abs_time_error": 1.111,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 103.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 103.05,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 103.0,
+          "abs_time_error": 0.05,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 103.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 103.05,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 103.408,
+          "abs_time_error": 0.358,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 103.408,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 103.458,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 104.623,
+          "abs_time_error": 1.165,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 104.623,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 104.673,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 105.0,
+          "abs_time_error": 0.327,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 105.0,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 105.05,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 106.974,
+          "abs_time_error": 1.924,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 106.974,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 107.024,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 107.93,
+          "abs_time_error": 0.906,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 107.93,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 107.98,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 109.93,
+          "abs_time_error": 1.95,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 109.93,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 109.98,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 111.313,
+          "abs_time_error": 1.333,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 111.313,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 111.363,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 111.362,
+          "abs_time_error": 0.001,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 111.362,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 111.412,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 111.69,
+          "abs_time_error": 0.278,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 111.69,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 111.74,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 113.469,
+          "abs_time_error": 1.729,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 113.469,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 113.519,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 113.69,
+          "abs_time_error": 0.171,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 113.69,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 113.74,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 114.802,
+          "abs_time_error": 1.062,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 114.802,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 114.852,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 115.69,
+          "abs_time_error": 0.838,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 115.69,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 115.74,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 116.376,
+          "abs_time_error": 0.636,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 116.376,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 116.426,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 116.617,
+          "abs_time_error": 0.191,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 116.617,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 116.667,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 116.953,
+          "abs_time_error": 0.286,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 116.953,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 117.003,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 117.215,
+          "abs_time_error": 0.212,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 117.215,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 117.265,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 117.69,
+          "abs_time_error": 0.425,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 117.69,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 117.74,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 117.819,
+          "abs_time_error": 0.079,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 117.819,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 117.869,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 117.842,
+          "abs_time_error": 0.027,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 117.842,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 117.892,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 118.337,
+          "abs_time_error": 0.445,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 118.337,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 118.387,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 118.71,
+          "abs_time_error": 0.323,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 118.71,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 118.76,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 119.07,
+          "abs_time_error": 0.31,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 119.07,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 119.12,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 119.407,
+          "abs_time_error": 0.287,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 119.407,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 119.457,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 119.667,
+          "abs_time_error": 0.21,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 119.667,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 119.717,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 119.819,
+          "abs_time_error": 0.102,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 119.819,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 119.869,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 119.971,
+          "abs_time_error": 0.102,
+          "label_correct": false,
+          "family_correct": false
+        }
+      ],
+      "long_horizon": {
+        "rollout": {
+          "5": {
+            "type_accuracy": 0.1,
+            "family_accuracy": 0.4222,
+            "time_mae": 1.5934,
+            "comparisons": 90,
+            "per_family": {
+              "phase_change": {
+                "type_accuracy": 0.0,
+                "family_accuracy": 0.0,
+                "time_mae": 2.2365,
+                "comparisons": 2
+              },
+              "vehicle_arrival": {
+                "type_accuracy": 0.125,
+                "family_accuracy": 0.4643,
+                "time_mae": 1.4226,
+                "comparisons": 56
+              },
+              "vehicle_departure": {
+                "type_accuracy": 0.0625,
+                "family_accuracy": 0.375,
+                "time_mae": 1.8522,
+                "comparisons": 32
+              }
+            },
+            "conditions": {
+              "congested": {
+                "accuracy": 0.8333,
+                "precision": 0.9167,
+                "recall": 0.8462,
+                "actual_positive_rate": 0.7222,
+                "predicted_positive_rate": 0.6667,
+                "comparisons": 18
+              },
+              "severe_queue": {
+                "accuracy": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "actual_positive_rate": 0.7778,
+                "predicted_positive_rate": 0.7778,
+                "comparisons": 18
+              },
+              "ns_pressure_high": {
+                "accuracy": 0.8889,
+                "precision": 1.0,
+                "recall": 0.8462,
+                "actual_positive_rate": 0.7222,
+                "predicted_positive_rate": 0.6111,
+                "comparisons": 18
+              },
+              "ew_pressure_high": {
+                "accuracy": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "actual_positive_rate": 0.1667,
+                "predicted_positive_rate": 0.1667,
+                "comparisons": 18
+              },
+              "pressure_imbalance": {
+                "accuracy": 0.7778,
+                "precision": 0.8125,
+                "recall": 0.9286,
+                "actual_positive_rate": 0.7778,
+                "predicted_positive_rate": 0.8889,
+                "comparisons": 18
+              }
+            }
+          },
+          "10": {
+            "type_accuracy": 0.1294,
+            "family_accuracy": 0.4765,
+            "time_mae": 2.3088,
+            "comparisons": 170,
+            "per_family": {
+              "phase_change": {
+                "type_accuracy": 0.0,
+                "family_accuracy": 0.0,
+                "time_mae": 2.2621,
+                "comparisons": 6
+              },
+              "vehicle_arrival": {
+                "type_accuracy": 0.1474,
+                "family_accuracy": 0.5474,
+                "time_mae": 2.2524,
+                "comparisons": 95
+              },
+              "vehicle_departure": {
+                "type_accuracy": 0.1159,
+                "family_accuracy": 0.4203,
+                "time_mae": 2.3904,
+                "comparisons": 69
+              }
+            },
+            "conditions": {
+              "congested": {
+                "accuracy": 0.8824,
+                "precision": 0.8667,
+                "recall": 1.0,
+                "actual_positive_rate": 0.7647,
+                "predicted_positive_rate": 0.8824,
+                "comparisons": 17
+              },
+              "severe_queue": {
+                "accuracy": 0.7647,
+                "precision": 0.8462,
+                "recall": 0.8462,
+                "actual_positive_rate": 0.7647,
+                "predicted_positive_rate": 0.7647,
+                "comparisons": 17
+              },
+              "ns_pressure_high": {
+                "accuracy": 0.8824,
+                "precision": 0.9167,
+                "recall": 0.9167,
+                "actual_positive_rate": 0.7059,
+                "predicted_positive_rate": 0.7059,
+                "comparisons": 17
+              },
+              "ew_pressure_high": {
+                "accuracy": 0.9412,
+                "precision": 0.75,
+                "recall": 1.0,
+                "actual_positive_rate": 0.1765,
+                "predicted_positive_rate": 0.2353,
+                "comparisons": 17
+              },
+              "pressure_imbalance": {
+                "accuracy": 0.6471,
+                "precision": 0.7143,
+                "recall": 0.8333,
+                "actual_positive_rate": 0.7059,
+                "predicted_positive_rate": 0.8235,
+                "comparisons": 17
+              }
+            }
+          }
+        },
+        "time_conditions": {
+          "10s": {
+            "congested": {
+              "accuracy": 0.8125,
+              "precision": 0.8,
+              "recall": 1.0,
+              "actual_positive_rate": 0.75,
+              "predicted_positive_rate": 0.9375,
+              "comparisons": 16
+            },
+            "severe_queue": {
+              "accuracy": 0.875,
+              "precision": 1.0,
+              "recall": 0.8571,
+              "actual_positive_rate": 0.875,
+              "predicted_positive_rate": 0.75,
+              "comparisons": 16
+            },
+            "ns_pressure_high": {
+              "accuracy": 0.875,
+              "precision": 1.0,
+              "recall": 0.8333,
+              "actual_positive_rate": 0.75,
+              "predicted_positive_rate": 0.625,
+              "comparisons": 16
+            },
+            "ew_pressure_high": {
+              "accuracy": 0.9375,
+              "precision": 0.75,
+              "recall": 1.0,
+              "actual_positive_rate": 0.1875,
+              "predicted_positive_rate": 0.25,
+              "comparisons": 16
+            },
+            "pressure_imbalance": {
+              "accuracy": 0.8125,
+              "precision": 0.8462,
+              "recall": 0.9167,
+              "actual_positive_rate": 0.75,
+              "predicted_positive_rate": 0.8125,
+              "comparisons": 16
+            }
+          },
+          "30s": {
+            "congested": {
+              "accuracy": 0.7692,
+              "precision": 0.8333,
+              "recall": 0.9091,
+              "actual_positive_rate": 0.8462,
+              "predicted_positive_rate": 0.9231,
+              "comparisons": 13
+            },
+            "severe_queue": {
+              "accuracy": 0.9231,
+              "precision": 1.0,
+              "recall": 0.9231,
+              "actual_positive_rate": 1.0,
+              "predicted_positive_rate": 0.9231,
+              "comparisons": 13
+            },
+            "ns_pressure_high": {
+              "accuracy": 0.5385,
+              "precision": 0.7778,
+              "recall": 0.6364,
+              "actual_positive_rate": 0.8462,
+              "predicted_positive_rate": 0.6923,
+              "comparisons": 13
+            },
+            "ew_pressure_high": {
+              "accuracy": 0.5385,
+              "precision": 0.0,
+              "recall": 0.0,
+              "actual_positive_rate": 0.0769,
+              "predicted_positive_rate": 0.3846,
+              "comparisons": 13
+            },
+            "pressure_imbalance": {
+              "accuracy": 0.7692,
+              "precision": 0.8182,
+              "recall": 0.9,
+              "actual_positive_rate": 0.7692,
+              "predicted_positive_rate": 0.8462,
+              "comparisons": 13
+            }
+          },
+          "60s": {
+            "congested": {
+              "accuracy": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "actual_positive_rate": 1.0,
+              "predicted_positive_rate": 1.0,
+              "comparisons": 9
+            },
+            "severe_queue": {
+              "accuracy": 0.8889,
+              "precision": 1.0,
+              "recall": 0.8889,
+              "actual_positive_rate": 1.0,
+              "predicted_positive_rate": 0.8889,
+              "comparisons": 9
+            },
+            "ns_pressure_high": {
+              "accuracy": 0.6667,
+              "precision": 1.0,
+              "recall": 0.6667,
+              "actual_positive_rate": 1.0,
+              "predicted_positive_rate": 0.6667,
+              "comparisons": 9
+            },
+            "ew_pressure_high": {
+              "accuracy": 0.5556,
+              "precision": 0.0,
+              "recall": 0.0,
+              "actual_positive_rate": 0.0,
+              "predicted_positive_rate": 0.4444,
+              "comparisons": 9
+            },
+            "pressure_imbalance": {
+              "accuracy": 0.7778,
+              "precision": 0.875,
+              "recall": 0.875,
+              "actual_positive_rate": 0.8889,
+              "predicted_positive_rate": 0.8889,
+              "comparisons": 9
+            }
+          }
+        }
+      }
+    },
+    "mechanistic": {
+      "description": "Phase-aware queue model with empirical arrival rates and controller timing",
+      "metrics": {
+        "type_accuracy": 0.4576,
+        "family_accuracy": 0.5593,
+        "time_mae": 0.7802,
+        "time_rmse": 1.2237,
+        "within_2s": 0.8814,
+        "predictions": 177,
+        "per_family": {
+          "phase_change": {
+            "type_accuracy": 1.0,
+            "family_accuracy": 1.0,
+            "time_mae": 0.0,
+            "predictions": 6
+          },
+          "vehicle_arrival": {
+            "type_accuracy": 0.0495,
+            "family_accuracy": 0.2277,
+            "time_mae": 1.3672,
+            "predictions": 101
+          },
+          "vehicle_departure": {
+            "type_accuracy": 1.0,
+            "family_accuracy": 1.0,
+            "time_mae": 0.0,
+            "predictions": 70
+          }
+        }
+      },
+      "example_predictions": [
+        {
+          "run_index": 0,
+          "context_time": 0.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 3.356,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 1.937,
+          "abs_time_error": 1.419,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 1.937,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 5.293,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 4.948,
+          "abs_time_error": 0.345,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 4.948,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 8.304,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 7.898,
+          "abs_time_error": 0.406,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 7.898,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 11.254,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 8.806,
+          "abs_time_error": 2.448,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 8.806,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 10.806,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 8.878,
+          "abs_time_error": 1.928,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 8.878,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 10.806,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 9.659,
+          "abs_time_error": 1.147,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 9.659,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 10.806,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 10.806,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 10.806,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 12.806,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 12.067,
+          "abs_time_error": 0.739,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 12.067,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 12.806,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 12.538,
+          "abs_time_error": 0.268,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 12.538,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 12.806,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 12.806,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 12.806,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 14.067,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 14.067,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 14.067,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 14.806,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 14.331,
+          "abs_time_error": 0.475,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 14.331,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 14.806,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 14.806,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 14.806,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 16.067,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 16.067,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 16.067,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 19.423,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 16.533,
+          "abs_time_error": 2.89,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 16.533,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 18.533,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 17.331,
+          "abs_time_error": 1.202,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 17.331,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 18.533,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 17.76,
+          "abs_time_error": 0.773,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 17.76,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 18.533,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 18.533,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 18.533,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 21.889,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 19.335,
+          "abs_time_error": 2.554,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 19.335,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 21.335,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 20.422,
+          "abs_time_error": 0.913,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 20.422,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 21.335,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 21.335,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 21.335,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 22.422,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 21.462,
+          "abs_time_error": 0.96,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 21.462,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 22.422,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 21.881,
+          "abs_time_error": 0.541,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 21.881,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 22.422,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 22.422,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 22.422,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 23.462,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 22.987,
+          "abs_time_error": 0.475,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 22.987,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 23.462,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 23.462,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 23.462,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 24.422,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 24.422,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 24.422,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 27.778,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 25.592,
+          "abs_time_error": 2.186,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 25.592,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 27.592,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 25.625,
+          "abs_time_error": 1.967,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 25.625,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 27.592,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 26.148,
+          "abs_time_error": 1.444,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 26.148,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 27.592,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 27.592,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 27.592,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 27.625,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 27.625,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 27.625,
+          "predicted_label": "phase_change:ALL_RED",
+          "predicted_time": 30.0,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 27.941,
+          "abs_time_error": 2.059,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 27.941,
+          "predicted_label": "phase_change:ALL_RED",
+          "predicted_time": 30.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 27.947,
+          "abs_time_error": 2.053,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 27.947,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 29.947,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 28.918,
+          "abs_time_error": 1.029,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 28.918,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 29.947,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 29.13,
+          "abs_time_error": 0.817,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 29.13,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 29.947,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 29.371,
+          "abs_time_error": 0.576,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 29.371,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 29.947,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 29.947,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 29.947,
+          "predicted_label": "phase_change:ALL_RED",
+          "predicted_time": 30.0,
+          "actual_label": "phase_change:ALL_RED",
+          "actual_time": 30.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 30.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 33.356,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 31.1,
+          "abs_time_error": 2.256,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 31.1,
+          "predicted_label": "phase_change:EW_GREEN",
+          "predicted_time": 34.0,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 32.2,
+          "abs_time_error": 1.8,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 32.2,
+          "predicted_label": "phase_change:EW_GREEN",
+          "predicted_time": 34.0,
+          "actual_label": "phase_change:EW_GREEN",
+          "actual_time": 34.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 34.0,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 36.0,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 34.38,
+          "abs_time_error": 1.62,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 34.38,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 36.0,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 34.594,
+          "abs_time_error": 1.406,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 34.594,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 36.0,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 36.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 36.0,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 36.0,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 36.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 36.0,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 38.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 36.308,
+          "abs_time_error": 1.692,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 36.308,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 38.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 37.702,
+          "abs_time_error": 0.298,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 37.702,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 38.0,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 38.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 38.0,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 38.0,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 38.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 38.0,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 40.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 38.153,
+          "abs_time_error": 1.847,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 38.153,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 40.0,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 38.399,
+          "abs_time_error": 1.601,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 38.399,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 40.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 39.109,
+          "abs_time_error": 0.891,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 39.109,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 40.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 39.288,
+          "abs_time_error": 0.712,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 39.288,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 40.0,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 40.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 40.0,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 40.0,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 40.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 40.0,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 42.0,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 42.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 42.0,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 42.0,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 42.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 42.0,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 44.0,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 44.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 44.0,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 44.0,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 44.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 44.0,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 46.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 44.009,
+          "abs_time_error": 1.991,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 44.009,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 46.0,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 46.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 46.0,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 46.0,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 46.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 46.0,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 48.0,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 48.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 48.0,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 48.0,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 48.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 48.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 51.356,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 50.009,
+          "abs_time_error": 1.347,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 50.009,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 52.009,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 51.027,
+          "abs_time_error": 0.982,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 51.027,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 52.009,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 52.009,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 52.009,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 55.365,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 52.178,
+          "abs_time_error": 3.187,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 52.178,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 54.178,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 54.178,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 54.178,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 57.534,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 54.768,
+          "abs_time_error": 2.766,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 54.768,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 56.768,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 55.319,
+          "abs_time_error": 1.449,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 55.319,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 56.768,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 55.607,
+          "abs_time_error": 1.161,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 55.607,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 56.768,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 56.166,
+          "abs_time_error": 0.602,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 56.166,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 56.768,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 56.341,
+          "abs_time_error": 0.427,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 56.341,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 56.768,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 56.768,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 56.768,
+          "predicted_label": "phase_change:ALL_RED",
+          "predicted_time": 59.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 58.379,
+          "abs_time_error": 0.621,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 58.379,
+          "predicted_label": "phase_change:ALL_RED",
+          "predicted_time": 59.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 58.38,
+          "abs_time_error": 0.62,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 58.38,
+          "predicted_label": "phase_change:ALL_RED",
+          "predicted_time": 59.0,
+          "actual_label": "phase_change:ALL_RED",
+          "actual_time": 59.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 59.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 62.356,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 59.035,
+          "abs_time_error": 3.321,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 59.035,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 62.391,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 59.051,
+          "abs_time_error": 3.34,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 59.051,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 62.407,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 59.429,
+          "abs_time_error": 2.978,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 59.429,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 62.785,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 60.146,
+          "abs_time_error": 2.639,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 60.146,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 63.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 60.188,
+          "abs_time_error": 2.812,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 60.188,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 63.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 62.711,
+          "abs_time_error": 0.289,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 62.711,
+          "predicted_label": "phase_change:NS_GREEN",
+          "predicted_time": 63.0,
+          "actual_label": "phase_change:NS_GREEN",
+          "actual_time": 63.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 63.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 65.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 63.759,
+          "abs_time_error": 1.241,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 63.759,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 65.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 64.04,
+          "abs_time_error": 0.96,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 64.04,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 65.0,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 65.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 65.0,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 65.0,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 65.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 65.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 67.0,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 67.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 67.0,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 67.0,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 67.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 67.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 69.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 67.386,
+          "abs_time_error": 1.614,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 67.386,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 69.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 67.679,
+          "abs_time_error": 1.321,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 67.679,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 69.0,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 69.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 69.0,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 69.0,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 69.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 69.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 71.0,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 70.559,
+          "abs_time_error": 0.441,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 70.559,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 71.0,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 71.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 71.0,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 71.0,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 71.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 71.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 73.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 71.413,
+          "abs_time_error": 1.587,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 71.413,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 73.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 72.805,
+          "abs_time_error": 0.195,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 72.805,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 73.0,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 73.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 73.0,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 73.0,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 73.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 73.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 75.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 74.281,
+          "abs_time_error": 0.719,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 74.281,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 75.0,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 75.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 75.0,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 75.0,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 75.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 75.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 77.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 75.674,
+          "abs_time_error": 1.326,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 75.674,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 77.0,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 76.505,
+          "abs_time_error": 0.495,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 76.505,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 77.0,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 77.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 77.0,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 77.0,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 77.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 77.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 79.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 78.254,
+          "abs_time_error": 0.746,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 78.254,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 79.0,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 79.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 79.0,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 79.0,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 79.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 79.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 81.0,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 81.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 81.0,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 81.0,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 81.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 81.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 83.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 82.608,
+          "abs_time_error": 0.392,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 82.608,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 83.0,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 83.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 83.0,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 83.0,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 83.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 83.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 85.0,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 85.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 85.0,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 85.0,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 85.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 85.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 87.0,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 85.383,
+          "abs_time_error": 1.617,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 85.383,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 87.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 86.625,
+          "abs_time_error": 0.375,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 86.625,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 87.0,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 87.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 87.0,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 87.0,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 87.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 87.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 89.0,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 88.399,
+          "abs_time_error": 0.601,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 88.399,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 89.0,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 89.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 89.0,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 89.0,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 89.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 89.0,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 91.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 89.763,
+          "abs_time_error": 1.237,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 89.763,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 91.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 90.905,
+          "abs_time_error": 0.095,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 90.905,
+          "predicted_label": "vehicle_departure:south",
+          "predicted_time": 91.0,
+          "actual_label": "vehicle_departure:south",
+          "actual_time": 91.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 91.0,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 92.905,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 92.832,
+          "abs_time_error": 0.073,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 92.832,
+          "predicted_label": "vehicle_departure:north",
+          "predicted_time": 92.905,
+          "actual_label": "vehicle_departure:north",
+          "actual_time": 92.905,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 92.905,
+          "predicted_label": "phase_change:ALL_RED",
+          "predicted_time": 93.0,
+          "actual_label": "phase_change:ALL_RED",
+          "actual_time": 93.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 93.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 96.356,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 93.002,
+          "abs_time_error": 3.354,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 93.002,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 96.358,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 94.149,
+          "abs_time_error": 2.209,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 94.149,
+          "predicted_label": "phase_change:EW_GREEN",
+          "predicted_time": 97.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 94.982,
+          "abs_time_error": 2.018,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 94.982,
+          "predicted_label": "phase_change:EW_GREEN",
+          "predicted_time": 97.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 95.433,
+          "abs_time_error": 1.567,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 95.433,
+          "predicted_label": "phase_change:EW_GREEN",
+          "predicted_time": 97.0,
+          "actual_label": "phase_change:EW_GREEN",
+          "actual_time": 97.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 97.0,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 99.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 97.466,
+          "abs_time_error": 1.534,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 97.466,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 99.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 97.833,
+          "abs_time_error": 1.167,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 97.833,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 99.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 98.014,
+          "abs_time_error": 0.986,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 98.014,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 99.0,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 99.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 99.0,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 99.0,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 99.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 99.0,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 101.0,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 99.111,
+          "abs_time_error": 1.889,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 99.111,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 101.0,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 101.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 101.0,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 101.0,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 101.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 101.0,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 103.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 101.071,
+          "abs_time_error": 1.929,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 101.071,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 103.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 101.839,
+          "abs_time_error": 1.161,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 101.839,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 103.0,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 103.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 103.0,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 103.0,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 103.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 103.0,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 105.0,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 103.408,
+          "abs_time_error": 1.592,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 103.408,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 105.0,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 104.623,
+          "abs_time_error": 0.377,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 104.623,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 105.0,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 105.0,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 105.0,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 108.356,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 106.974,
+          "abs_time_error": 1.382,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 106.974,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 110.33,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 107.93,
+          "abs_time_error": 2.4,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 107.93,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 109.93,
+          "actual_label": "vehicle_departure:east",
+          "actual_time": 109.93,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 109.93,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 113.286,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 111.313,
+          "abs_time_error": 1.973,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 111.313,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 114.669,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 111.362,
+          "abs_time_error": 3.307,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 111.362,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 114.718,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 111.69,
+          "abs_time_error": 3.028,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 111.69,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 113.69,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 113.469,
+          "abs_time_error": 0.221,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 113.469,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 113.69,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 113.69,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 113.69,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 115.69,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 114.802,
+          "abs_time_error": 0.888,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 114.802,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 115.69,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 115.69,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 115.69,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 117.69,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 116.376,
+          "abs_time_error": 1.314,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 116.376,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 117.69,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 116.617,
+          "abs_time_error": 1.073,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 116.617,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 117.69,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 116.953,
+          "abs_time_error": 0.737,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 116.953,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 117.69,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 117.215,
+          "abs_time_error": 0.475,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 117.215,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 117.69,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 117.69,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 117.69,
+          "predicted_label": "vehicle_arrival:north",
+          "predicted_time": 121.046,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 117.819,
+          "abs_time_error": 3.227,
+          "label_correct": false,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 117.819,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 119.819,
+          "actual_label": "vehicle_arrival:north",
+          "actual_time": 117.842,
+          "abs_time_error": 1.977,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 117.842,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 119.819,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 118.337,
+          "abs_time_error": 1.482,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 118.337,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 119.819,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 118.71,
+          "abs_time_error": 1.109,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 118.71,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 119.819,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 119.07,
+          "abs_time_error": 0.749,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 119.07,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 119.819,
+          "actual_label": "vehicle_arrival:east",
+          "actual_time": 119.407,
+          "abs_time_error": 0.412,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 119.407,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 119.819,
+          "actual_label": "vehicle_arrival:south",
+          "actual_time": 119.667,
+          "abs_time_error": 0.152,
+          "label_correct": false,
+          "family_correct": false
+        },
+        {
+          "run_index": 0,
+          "context_time": 119.667,
+          "predicted_label": "vehicle_departure:west",
+          "predicted_time": 119.819,
+          "actual_label": "vehicle_departure:west",
+          "actual_time": 119.819,
+          "abs_time_error": 0.0,
+          "label_correct": true,
+          "family_correct": true
+        },
+        {
+          "run_index": 0,
+          "context_time": 119.819,
+          "predicted_label": "vehicle_departure:east",
+          "predicted_time": 121.07,
+          "actual_label": "vehicle_arrival:west",
+          "actual_time": 119.971,
+          "abs_time_error": 1.099,
+          "label_correct": false,
+          "family_correct": false
+        }
+      ],
+      "long_horizon": {
+        "rollout": {
+          "5": {
+            "type_accuracy": 0.2111,
+            "family_accuracy": 0.4444,
+            "time_mae": 2.7569,
+            "comparisons": 90,
+            "per_family": {
+              "phase_change": {
+                "type_accuracy": 0.0,
+                "family_accuracy": 0.0,
+                "time_mae": 2.6781,
+                "comparisons": 2
+              },
+              "vehicle_arrival": {
+                "type_accuracy": 0.0893,
+                "family_accuracy": 0.2321,
+                "time_mae": 3.4495,
+                "comparisons": 56
+              },
+              "vehicle_departure": {
+                "type_accuracy": 0.4375,
+                "family_accuracy": 0.8438,
+                "time_mae": 1.5498,
+                "comparisons": 32
+              }
+            },
+            "conditions": {
+              "congested": {
+                "accuracy": 0.7222,
+                "precision": 1.0,
+                "recall": 0.6154,
+                "actual_positive_rate": 0.7222,
+                "predicted_positive_rate": 0.4444,
+                "comparisons": 18
+              },
+              "severe_queue": {
+                "accuracy": 0.8333,
+                "precision": 1.0,
+                "recall": 0.7857,
+                "actual_positive_rate": 0.7778,
+                "predicted_positive_rate": 0.6111,
+                "comparisons": 18
+              },
+              "ns_pressure_high": {
+                "accuracy": 0.8889,
+                "precision": 1.0,
+                "recall": 0.8462,
+                "actual_positive_rate": 0.7222,
+                "predicted_positive_rate": 0.6111,
+                "comparisons": 18
+              },
+              "ew_pressure_high": {
+                "accuracy": 0.8889,
+                "precision": 1.0,
+                "recall": 0.3333,
+                "actual_positive_rate": 0.1667,
+                "predicted_positive_rate": 0.0556,
+                "comparisons": 18
+              },
+              "pressure_imbalance": {
+                "accuracy": 0.8333,
+                "precision": 0.9231,
+                "recall": 0.8571,
+                "actual_positive_rate": 0.7778,
+                "predicted_positive_rate": 0.7222,
+                "comparisons": 18
+              }
+            }
+          },
+          "10": {
+            "type_accuracy": 0.2235,
+            "family_accuracy": 0.4412,
+            "time_mae": 4.963,
+            "comparisons": 170,
+            "per_family": {
+              "phase_change": {
+                "type_accuracy": 0.0,
+                "family_accuracy": 0.0,
+                "time_mae": 5.5644,
+                "comparisons": 6
+              },
+              "vehicle_arrival": {
+                "type_accuracy": 0.0947,
+                "family_accuracy": 0.2421,
+                "time_mae": 5.5851,
+                "comparisons": 95
+              },
+              "vehicle_departure": {
+                "type_accuracy": 0.4203,
+                "family_accuracy": 0.7536,
+                "time_mae": 4.0542,
+                "comparisons": 69
+              }
+            },
+            "conditions": {
+              "congested": {
+                "accuracy": 0.4118,
+                "precision": 0.8,
+                "recall": 0.3077,
+                "actual_positive_rate": 0.7647,
+                "predicted_positive_rate": 0.2941,
+                "comparisons": 17
+              },
+              "severe_queue": {
+                "accuracy": 0.7647,
+                "precision": 1.0,
+                "recall": 0.6923,
+                "actual_positive_rate": 0.7647,
+                "predicted_positive_rate": 0.5294,
+                "comparisons": 17
+              },
+              "ns_pressure_high": {
+                "accuracy": 0.7647,
+                "precision": 1.0,
+                "recall": 0.6667,
+                "actual_positive_rate": 0.7059,
+                "predicted_positive_rate": 0.4706,
+                "comparisons": 17
+              },
+              "ew_pressure_high": {
+                "accuracy": 0.8235,
+                "precision": 0.0,
+                "recall": 0.0,
+                "actual_positive_rate": 0.1765,
+                "predicted_positive_rate": 0.0,
+                "comparisons": 17
+              },
+              "pressure_imbalance": {
+                "accuracy": 0.7059,
+                "precision": 0.8182,
+                "recall": 0.75,
+                "actual_positive_rate": 0.7059,
+                "predicted_positive_rate": 0.6471,
+                "comparisons": 17
+              }
+            }
+          }
+        },
+        "time_conditions": {
+          "10s": {
+            "congested": {
+              "accuracy": 0.5625,
+              "precision": 1.0,
+              "recall": 0.4167,
+              "actual_positive_rate": 0.75,
+              "predicted_positive_rate": 0.3125,
+              "comparisons": 16
+            },
+            "severe_queue": {
+              "accuracy": 0.6875,
+              "precision": 1.0,
+              "recall": 0.6429,
+              "actual_positive_rate": 0.875,
+              "predicted_positive_rate": 0.5625,
+              "comparisons": 16
+            },
+            "ns_pressure_high": {
+              "accuracy": 0.75,
+              "precision": 1.0,
+              "recall": 0.6667,
+              "actual_positive_rate": 0.75,
+              "predicted_positive_rate": 0.5,
+              "comparisons": 16
+            },
+            "ew_pressure_high": {
+              "accuracy": 0.8125,
+              "precision": 0.0,
+              "recall": 0.0,
+              "actual_positive_rate": 0.1875,
+              "predicted_positive_rate": 0.0,
+              "comparisons": 16
+            },
+            "pressure_imbalance": {
+              "accuracy": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "actual_positive_rate": 0.75,
+              "predicted_positive_rate": 0.75,
+              "comparisons": 16
+            }
+          },
+          "30s": {
+            "congested": {
+              "accuracy": 0.1538,
+              "precision": 0.0,
+              "recall": 0.0,
+              "actual_positive_rate": 0.8462,
+              "predicted_positive_rate": 0.0,
+              "comparisons": 13
+            },
+            "severe_queue": {
+              "accuracy": 0.0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "actual_positive_rate": 1.0,
+              "predicted_positive_rate": 0.0,
+              "comparisons": 13
+            },
+            "ns_pressure_high": {
+              "accuracy": 0.2308,
+              "precision": 1.0,
+              "recall": 0.0909,
+              "actual_positive_rate": 0.8462,
+              "predicted_positive_rate": 0.0769,
+              "comparisons": 13
+            },
+            "ew_pressure_high": {
+              "accuracy": 0.9231,
+              "precision": 0.0,
+              "recall": 0.0,
+              "actual_positive_rate": 0.0769,
+              "predicted_positive_rate": 0.0,
+              "comparisons": 13
+            },
+            "pressure_imbalance": {
+              "accuracy": 0.6154,
+              "precision": 1.0,
+              "recall": 0.5,
+              "actual_positive_rate": 0.7692,
+              "predicted_positive_rate": 0.3846,
+              "comparisons": 13
+            }
+          },
+          "60s": {
+            "congested": {
+              "accuracy": 0.0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "actual_positive_rate": 1.0,
+              "predicted_positive_rate": 0.0,
+              "comparisons": 9
+            },
+            "severe_queue": {
+              "accuracy": 0.3333,
+              "precision": 1.0,
+              "recall": 0.3333,
+              "actual_positive_rate": 1.0,
+              "predicted_positive_rate": 0.3333,
+              "comparisons": 9
+            },
+            "ns_pressure_high": {
+              "accuracy": 0.1111,
+              "precision": 1.0,
+              "recall": 0.1111,
+              "actual_positive_rate": 1.0,
+              "predicted_positive_rate": 0.1111,
+              "comparisons": 9
+            },
+            "ew_pressure_high": {
+              "accuracy": 1.0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "actual_positive_rate": 0.0,
+              "predicted_positive_rate": 0.0,
+              "comparisons": 9
+            },
+            "pressure_imbalance": {
+              "accuracy": 0.4444,
+              "precision": 1.0,
+              "recall": 0.375,
+              "actual_positive_rate": 0.8889,
+              "predicted_positive_rate": 0.3333,
+              "comparisons": 9
+            }
+          }
+        }
+      }
+    }
+  }
+}

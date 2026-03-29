@@ -1,0 +1,24 @@
+{
+  "device": "cpu",
+  "train_runs": 60,
+  "eval_runs": 20,
+  "duration_seconds": 300,
+  "control_mode": "adaptive",
+  "simulation_profile": "richer",
+  "epochs": 14,
+  "batch_size": 128,
+  "data_prep_seconds": 0.054,
+  "total_wall_seconds": 590.558,
+  "models": {
+    "multitask_neural_tpp": {
+      "fit_seconds": 230.625,
+      "eval_seconds": 25.692,
+      "total_seconds": 256.318
+    },
+    "continuous_tpp": {
+      "fit_seconds": 275.404,
+      "eval_seconds": 58.748,
+      "total_seconds": 334.151
+    }
+  }
+}

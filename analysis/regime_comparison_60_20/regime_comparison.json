@@ -1,0 +1,308 @@
+{
+  "fixed_source": {
+    "train_runs": 60,
+    "eval_runs": 20,
+    "duration_seconds": 300
+  },
+  "adaptive_source": {
+    "train_runs": 60,
+    "eval_runs": 20,
+    "duration_seconds": 300
+  },
+  "condition_descriptions": {
+    "congested": "Mean balanced accuracy for predicting whether total queue reaches the congested threshold.",
+    "severe_queue": "Mean balanced accuracy for predicting whether any single approach develops a severe queue.",
+    "ns_pressure_high": "Mean balanced accuracy for predicting elevated north-south corridor pressure.",
+    "ew_pressure_high": "Mean balanced accuracy for predicting elevated east-west corridor pressure.",
+    "pressure_imbalance": "Mean balanced accuracy for predicting a strong imbalance between the two corridors."
+  },
+  "models": {
+    "continuous_tpp": {
+      "description": "Continuous-time LSTM next-event predictor with elapsed-time decay and direct fixed-horizon condition heads",
+      "fixed": {
+        "type_accuracy": 0.4991,
+        "family_accuracy": 0.7249,
+        "time_mae": 0.3982,
+        "mean_condition_balanced_accuracy": 0.7891,
+        "mean_condition_brier": 0.0832,
+        "mean_condition_log_loss": 0.2646
+      },
+      "adaptive": {
+        "type_accuracy": 0.4941,
+        "family_accuracy": 0.7028,
+        "time_mae": 0.4025,
+        "mean_condition_balanced_accuracy": 0.788,
+        "mean_condition_brier": 0.0693,
+        "mean_condition_log_loss": 0.225
+      },
+      "per_condition": {
+        "congested": {
+          "fixed_mean_balanced_accuracy": 0.7026,
+          "adaptive_mean_balanced_accuracy": 0.752
+        },
+        "severe_queue": {
+          "fixed_mean_balanced_accuracy": 0.7949,
+          "adaptive_mean_balanced_accuracy": 0.73
+        },
+        "ns_pressure_high": {
+          "fixed_mean_balanced_accuracy": 0.8708,
+          "adaptive_mean_balanced_accuracy": 0.8788
+        },
+        "ew_pressure_high": {
+          "fixed_mean_balanced_accuracy": 0.8162,
+          "adaptive_mean_balanced_accuracy": 0.8566
+        },
+        "pressure_imbalance": {
+          "fixed_mean_balanced_accuracy": 0.7608,
+          "adaptive_mean_balanced_accuracy": 0.7225
+        }
+      }
+    },
+    "global_rate": {
+      "description": "Global empirical recurrence times per event label",
+      "fixed": {
+        "type_accuracy": 0.1059,
+        "family_accuracy": 0.4387,
+        "time_mae": 0.6288,
+        "mean_condition_balanced_accuracy": 0.6191,
+        "mean_condition_brier": 0.1988,
+        "mean_condition_log_loss": 2.7461
+      },
+      "adaptive": {
+        "type_accuracy": 0.0986,
+        "family_accuracy": 0.3894,
+        "time_mae": 0.6309,
+        "mean_condition_balanced_accuracy": 0.579,
+        "mean_condition_brier": 0.2299,
+        "mean_condition_log_loss": 3.1767
+      },
+      "per_condition": {
+        "congested": {
+          "fixed_mean_balanced_accuracy": 0.6787,
+          "adaptive_mean_balanced_accuracy": 0.7002
+        },
+        "severe_queue": {
+          "fixed_mean_balanced_accuracy": 0.6233,
+          "adaptive_mean_balanced_accuracy": 0.6271
+        },
+        "ns_pressure_high": {
+          "fixed_mean_balanced_accuracy": 0.6595,
+          "adaptive_mean_balanced_accuracy": 0.5917
+        },
+        "ew_pressure_high": {
+          "fixed_mean_balanced_accuracy": 0.5868,
+          "adaptive_mean_balanced_accuracy": 0.486
+        },
+        "pressure_imbalance": {
+          "fixed_mean_balanced_accuracy": 0.547,
+          "adaptive_mean_balanced_accuracy": 0.4901
+        }
+      }
+    },
+    "mechanistic": {
+      "description": "Phase-aware queue model with empirical arrival rates and controller timing",
+      "fixed": {
+        "type_accuracy": 0.3449,
+        "family_accuracy": 0.6942,
+        "time_mae": 0.6006,
+        "mean_condition_balanced_accuracy": 0.6306,
+        "mean_condition_brier": 0.1718,
+        "mean_condition_log_loss": 0.9741
+      },
+      "adaptive": {
+        "type_accuracy": 0.306,
+        "family_accuracy": 0.5865,
+        "time_mae": 2.1114,
+        "mean_condition_balanced_accuracy": 0.6344,
+        "mean_condition_brier": 0.1724,
+        "mean_condition_log_loss": 1.1229
+      },
+      "per_condition": {
+        "congested": {
+          "fixed_mean_balanced_accuracy": 0.7224,
+          "adaptive_mean_balanced_accuracy": 0.7424
+        },
+        "severe_queue": {
+          "fixed_mean_balanced_accuracy": 0.7073,
+          "adaptive_mean_balanced_accuracy": 0.7383
+        },
+        "ns_pressure_high": {
+          "fixed_mean_balanced_accuracy": 0.5893,
+          "adaptive_mean_balanced_accuracy": 0.5839
+        },
+        "ew_pressure_high": {
+          "fixed_mean_balanced_accuracy": 0.5774,
+          "adaptive_mean_balanced_accuracy": 0.6032
+        },
+        "pressure_imbalance": {
+          "fixed_mean_balanced_accuracy": 0.5569,
+          "adaptive_mean_balanced_accuracy": 0.5041
+        }
+      }
+    },
+    "multitask_neural_tpp": {
+      "description": "GRU event predictor with direct fixed-horizon condition heads for congestion and corridor-pressure forecasting",
+      "fixed": {
+        "type_accuracy": 0.4914,
+        "family_accuracy": 0.6928,
+        "time_mae": 0.3969,
+        "mean_condition_balanced_accuracy": 0.8116,
+        "mean_condition_brier": 0.0756,
+        "mean_condition_log_loss": 0.2404
+      },
+      "adaptive": {
+        "type_accuracy": 0.4962,
+        "family_accuracy": 0.7125,
+        "time_mae": 0.4049,
+        "mean_condition_balanced_accuracy": 0.8146,
+        "mean_condition_brier": 0.0659,
+        "mean_condition_log_loss": 0.2136
+      },
+      "per_condition": {
+        "congested": {
+          "fixed_mean_balanced_accuracy": 0.7644,
+          "adaptive_mean_balanced_accuracy": 0.7816
+        },
+        "severe_queue": {
+          "fixed_mean_balanced_accuracy": 0.8057,
+          "adaptive_mean_balanced_accuracy": 0.806
+        },
+        "ns_pressure_high": {
+          "fixed_mean_balanced_accuracy": 0.873,
+          "adaptive_mean_balanced_accuracy": 0.8703
+        },
+        "ew_pressure_high": {
+          "fixed_mean_balanced_accuracy": 0.8343,
+          "adaptive_mean_balanced_accuracy": 0.87
+        },
+        "pressure_imbalance": {
+          "fixed_mean_balanced_accuracy": 0.7804,
+          "adaptive_mean_balanced_accuracy": 0.745
+        }
+      }
+    },
+    "neural_tpp": {
+      "description": "Learned GRU next-event predictor over recent event history plus queue/phase state",
+      "fixed": {
+        "type_accuracy": 0.4998,
+        "family_accuracy": 0.72,
+        "time_mae": 0.3897,
+        "mean_condition_balanced_accuracy": 0.6813,
+        "mean_condition_brier": 0.2936,
+        "mean_condition_log_loss": 4.0563
+      },
+      "adaptive": {
+        "type_accuracy": 0.4936,
+        "family_accuracy": 0.6852,
+        "time_mae": 0.4087,
+        "mean_condition_balanced_accuracy": 0.7091,
+        "mean_condition_brier": 0.255,
+        "mean_condition_log_loss": 3.5223
+      },
+      "per_condition": {
+        "congested": {
+          "fixed_mean_balanced_accuracy": 0.7582,
+          "adaptive_mean_balanced_accuracy": 0.7564
+        },
+        "severe_queue": {
+          "fixed_mean_balanced_accuracy": 0.7469,
+          "adaptive_mean_balanced_accuracy": 0.7571
+        },
+        "ns_pressure_high": {
+          "fixed_mean_balanced_accuracy": 0.7286,
+          "adaptive_mean_balanced_accuracy": 0.7549
+        },
+        "ew_pressure_high": {
+          "fixed_mean_balanced_accuracy": 0.6023,
+          "adaptive_mean_balanced_accuracy": 0.6319
+        },
+        "pressure_imbalance": {
+          "fixed_mean_balanced_accuracy": 0.5706,
+          "adaptive_mean_balanced_accuracy": 0.6451
+        }
+      }
+    },
+    "transformer_tpp": {
+      "description": "Causal attention temporal point process baseline with position/time encoding and rollout-aware scheduled-sampling training",
+      "fixed": {
+        "type_accuracy": 0.4771,
+        "family_accuracy": 0.7274,
+        "time_mae": 0.3936,
+        "mean_condition_balanced_accuracy": 0.7846,
+        "mean_condition_brier": 0.0868,
+        "mean_condition_log_loss": 0.2768
+      },
+      "adaptive": {
+        "type_accuracy": 0.4813,
+        "family_accuracy": 0.7083,
+        "time_mae": 0.4054,
+        "mean_condition_balanced_accuracy": 0.8009,
+        "mean_condition_brier": 0.0712,
+        "mean_condition_log_loss": 0.2311
+      },
+      "per_condition": {
+        "congested": {
+          "fixed_mean_balanced_accuracy": 0.7544,
+          "adaptive_mean_balanced_accuracy": 0.7997
+        },
+        "severe_queue": {
+          "fixed_mean_balanced_accuracy": 0.7684,
+          "adaptive_mean_balanced_accuracy": 0.7976
+        },
+        "ns_pressure_high": {
+          "fixed_mean_balanced_accuracy": 0.8517,
+          "adaptive_mean_balanced_accuracy": 0.8121
+        },
+        "ew_pressure_high": {
+          "fixed_mean_balanced_accuracy": 0.7989,
+          "adaptive_mean_balanced_accuracy": 0.8575
+        },
+        "pressure_imbalance": {
+          "fixed_mean_balanced_accuracy": 0.7498,
+          "adaptive_mean_balanced_accuracy": 0.7375
+        }
+      }
+    },
+    "transition": {
+      "description": "Most likely next label and delay conditioned on the current label",
+      "fixed": {
+        "type_accuracy": 0.3515,
+        "family_accuracy": 0.5918,
+        "time_mae": 0.4482,
+        "mean_condition_balanced_accuracy": 0.7045,
+        "mean_condition_brier": 0.3154,
+        "mean_condition_log_loss": 4.3579
+      },
+      "adaptive": {
+        "type_accuracy": 0.3567,
+        "family_accuracy": 0.5933,
+        "time_mae": 0.4618,
+        "mean_condition_balanced_accuracy": 0.6613,
+        "mean_condition_brier": 0.3113,
+        "mean_condition_log_loss": 4.3002
+      },
+      "per_condition": {
+        "congested": {
+          "fixed_mean_balanced_accuracy": 0.8302,
+          "adaptive_mean_balanced_accuracy": 0.8003
+        },
+        "severe_queue": {
+          "fixed_mean_balanced_accuracy": 0.7676,
+          "adaptive_mean_balanced_accuracy": 0.7484
+        },
+        "ns_pressure_high": {
+          "fixed_mean_balanced_accuracy": 0.7568,
+          "adaptive_mean_balanced_accuracy": 0.6868
+        },
+        "ew_pressure_high": {
+          "fixed_mean_balanced_accuracy": 0.6251,
+          "adaptive_mean_balanced_accuracy": 0.5221
+        },
+        "pressure_imbalance": {
+          "fixed_mean_balanced_accuracy": 0.5428,
+          "adaptive_mean_balanced_accuracy": 0.5489
+        }
+      }
+    }
+  }
+}
