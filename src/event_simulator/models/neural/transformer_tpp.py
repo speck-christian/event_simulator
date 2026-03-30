@@ -256,7 +256,7 @@ class TransformerTPPBaseline(LearnedTPPBaseline):
         rollout_lengths = lengths.clone()
         non_full_mask = lengths < self.context_len
         if non_full_mask.any():
-            row_indices = torch.arange(labels.size(0))[non_full_mask]
+            row_indices = torch.arange(labels.size(0), device=labels.device)[non_full_mask]
             insert_positions = lengths[non_full_mask]
             rollout_labels[row_indices, insert_positions] = appended_labels[non_full_mask]
             rollout_deltas[row_indices, insert_positions] = appended_deltas[non_full_mask]
