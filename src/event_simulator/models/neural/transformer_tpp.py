@@ -148,7 +148,13 @@ class TransformerTPPBaseline(LearnedTPPBaseline):
         self.model.train()
         self.condition_trunk.train()
         self.condition_head.train()
+        self.training_log(
+            f"starting fit epochs={self.epochs} batches_per_epoch={len(loader)} device={self.runtime_device}"
+        )
         for epoch_index in range(self.epochs):
+            epoch_start = self.training_epoch_start()
+            epoch_loss_sum = 0.0
+            batch_count = 0
             rollout_ratio = max(0.0, (epoch_index + 1 - self.epochs * 0.35) / max(1.0, self.epochs * 0.65)) * 0.45
             for batch in loader:
                 batch = self.move_batch_to_device(batch, self.runtime_device)
@@ -190,6 +196,15 @@ class TransformerTPPBaseline(LearnedTPPBaseline):
                     max_norm=1.0,
                 )
                 optimizer.step()
+                epoch_loss_sum += float(loss.detach().item())
+                batch_count += 1
+            self.training_epoch_end(
+                epoch_index + 1,
+                self.epochs,
+                epoch_start,
+                epoch_loss_sum / max(1, batch_count),
+                extra=f"rollout_ratio={rollout_ratio:.2f}",
+            )
         self.model.eval()
         self.condition_trunk.eval()
         self.condition_head.eval()

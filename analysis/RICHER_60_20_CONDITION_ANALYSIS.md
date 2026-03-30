@@ -1,138 +1,126 @@
-# Richer 60/20 Condition Analysis
+# Rebalanced Richer 60/20 Condition Analysis
 
-This note compares the earlier adaptive `60/20` benchmark on the baseline simulator against the adaptive `60/20` benchmark on the richer simulator:
+This note compares the earlier adaptive `60/20` benchmark on the baseline simulator against the current adaptive `60/20` benchmark on the rebalanced richer simulator:
 
 - baseline: `analysis/adaptive_60_20/model_comparison.json`
-- richer: `analysis/adaptive_richer_60_20/model_comparison.json`
+- rebalanced richer: `analysis/adaptive_richer_60_20_rebalanced_full/model_comparison.json`
 
-The richer simulator introduces:
+The rebalanced richer simulator keeps the same bursty, lane-heterogeneous design as the earlier richer profile, but lowers saturation so congestion-style conditions are no longer almost always on. That makes the condition leaderboard more informative. The current main benchmark now also includes the new `neuro_symbolic_tpp` model.
 
-- time-varying corridor demand pulses
-- bursty local arrivals
-- lane-specific service headways
+## Current Condition Winners
 
-The main question here is not only whether scores change, but which condition targets change and which models remain strongest under the richer environment.
+- `congested`: `neuro_symbolic_tpp` is best with mean balanced accuracy `0.7884`
+- `severe_queue`: `neuro_symbolic_tpp` is best with mean balanced accuracy `0.7710`
+- `ns_pressure_high`: `neuro_symbolic_tpp` is best with mean balanced accuracy `0.8577`
+- `ew_pressure_high`: `neuro_symbolic_tpp` is best with mean balanced accuracy `0.8468`
+- `pressure_imbalance`: `neuro_symbolic_tpp` is best with mean balanced accuracy `0.7468`
 
-## Condition Winners On Richer 60/20
+So the rebalanced richer benchmark now has a clearer condition leader: `neuro_symbolic_tpp` is strongest overall, while `transformer_tpp` and `multitask_neural_tpp` remain the best purely neural competitors.
 
-- `congested`: `multitask_neural_tpp` remains best with mean balanced accuracy `0.7530`
-- `severe_queue`: `multitask_neural_tpp` remains best with mean balanced accuracy `0.7559`
-- `ns_pressure_high`: `multitask_neural_tpp` remains best with mean balanced accuracy `0.8095`
-- `ew_pressure_high`: `multitask_neural_tpp` remains best with mean balanced accuracy `0.8685`
-- `pressure_imbalance`: `continuous_tpp` is best with mean balanced accuracy `0.8042`, narrowly above `multitask_neural_tpp` at `0.8023`
+## Full Learned-Model Readout
 
-So the richer benchmark does not overturn the general condition-forecast story, but it does make the leaderboard less uniform. In particular, `continuous_tpp` becomes the strongest model on imbalance forecasting.
+- `neuro_symbolic_tpp`
+  - mean condition balanced accuracy: `0.8021`
+  - mean Brier: `0.1076`
+  - mean log loss: `0.3369`
+- `transformer_tpp`
+  - `0.7901`
+  - `0.1131`
+  - `0.3566`
+- `multitask_neural_tpp`
+  - `0.7788`
+  - `0.1190`
+  - `0.3731`
+- `continuous_tpp`
+  - `0.7677`
+  - `0.1256`
+  - `0.3931`
+- `neural_tpp`
+  - `0.6642`
+  - `0.3672`
+  - `5.0727`
 
-## Which Conditions Got Harder
+The direct-condition models still dominate the rollout-derived `neural_tpp`, and the strongest model is now the neuro-symbolic variant rather than a purely neural architecture.
 
-The richer simulator makes some condition targets much harder for the learned direct-condition models:
+## What Changed Relative To The Earlier Richer Run
 
-- `congested`
-  - `continuous_tpp`: `0.7520 -> 0.5902`
-  - `transformer_tpp`: `0.7997 -> 0.6736`
-  - `neural_tpp`: `0.7564 -> 0.6678`
-- `severe_queue`
-  - `continuous_tpp`: `0.7300 -> 0.6006`
-  - `neural_tpp`: `0.7571 -> 0.6161`
-  - `transformer_tpp`: `0.7976 -> 0.7164`
-- `ns_pressure_high`
-  - `continuous_tpp`: `0.8788 -> 0.6559`
-  - `transformer_tpp`: `0.8121 -> 0.7064`
-  - `multitask_neural_tpp`: `0.8703 -> 0.8095`
+The earlier richer profile was too saturated: congestion and severe-queue targets were positive almost all the time. After the simulator rebalance:
 
-These are the clearest signs that the richer simulator is exposing new structural difficulty rather than merely injecting noise.
+- the direct-condition models are closer together than in the baseline simulator
+- the neuro-symbolic branch pushes condition quality higher again by injecting explicit rule structure
+- `continuous_tpp` recovers a healthier middle position instead of collapsing on condition quality
+- `multitask_neural_tpp` remains strong, but is no longer the default best model on every congestion-like target
 
-## Which Conditions Became More Distinctive
+This suggests the old richer profile was rewarding persistence handling more than genuinely discriminative condition forecasting, and that explicit symbolic condition logic is especially effective once the simulator becomes less saturated.
 
-Some condition targets actually become easier or more separable for certain models:
+## Event And Condition Specialization
 
-- `ew_pressure_high`
-  - `transition`: `0.5221 -> 0.7146`
-  - `neural_tpp`: `0.6319 -> 0.7497`
-  - `continuous_tpp`: `0.8566 -> 0.8627`
-- `pressure_imbalance`
-  - `mechanistic`: `0.5041 -> 0.6998`
-  - `continuous_tpp`: `0.7225 -> 0.8042`
-  - `multitask_neural_tpp`: `0.7450 -> 0.8023`
+The rebalanced richer run makes model specialization clearer:
 
-This is consistent with the richer simulator adding stronger corridor-specific and lane-specific asymmetries. The new environment makes directional pressure more informative, especially for east-west pressure and imbalance.
+- best exact type accuracy: `neural_tpp` at `0.4915`
+- best family accuracy: `neuro_symbolic_tpp` at `0.6290`
+- best timing: `continuous_tpp` with time MAE `0.4473`
+- best condition forecasting: `neuro_symbolic_tpp` at `0.8021`
 
-## Model-Specific Readout
+That split is useful. We no longer have one model winning every task slice. Instead:
 
-### `multitask_neural_tpp`
+- `neural_tpp` is still best at exact next-event typing
+- `continuous_tpp` is best at timing
+- `neuro_symbolic_tpp` is best at fixed-horizon condition risk and also strongest on family accuracy among the learned models
 
-Still the best overall condition forecaster.
+## Per-Condition Interpretation
 
-- strongest on `congested`, `severe_queue`, `ns_pressure_high`, and `ew_pressure_high`
-- drops under richer dynamics, but less sharply than `continuous_tpp` and `transformer_tpp`
-- remains the most robust direct-condition model overall
+### `neuro_symbolic_tpp`
 
-Suggested next step:
+This is now the strongest richer-simulator condition model overall.
 
-- improve short-horizon congestion and severe-queue sensitivity under bursty arrivals
-
-### `continuous_tpp`
-
-Still strongest on one-step timing, but more condition-sensitive under the richer simulator.
-
-- takes over first place on `pressure_imbalance`
-- degrades sharply on `congested`, `severe_queue`, and especially `ns_pressure_high`
-- likely benefiting from its time representation, but losing some of the direct-condition edge under nonstationary demand
-
-Suggested next step:
-
-- strengthen direct condition supervision for congestion-like conditions rather than pressure-asymmetry conditions
+- best on all five pooled condition slices
+- best pooled probabilistic quality too
+- likely benefiting from combining explicit rule-threshold structure with a learned event-history residual, which is a natural fit for benchmark conditions like congestion and pressure imbalance
 
 ### `transformer_tpp`
 
-Remains competitive, but loses more than `multitask_neural_tpp` on several richer condition targets.
+Still the strongest purely neural condition model.
 
-- still second on `severe_queue` and `ns_pressure_high`
-- loses ground on `congested`
-- retains strong `ew_pressure_high` behavior
+- second overall on pooled condition metrics
+- still a very strong option if we want a model with no explicit symbolic branch
+- likely benefiting from wider context access now that the simulator produces more varied buildup and recovery patterns
 
-Suggested next step:
+### `multitask_neural_tpp`
 
-- improve robustness to bursty local demand rather than just broader context aggregation
+Still a very strong direct-condition specialist.
+
+- third overall on pooled condition metrics
+- remains robust across all five conditions
+- now clearly behind the neuro-symbolic model on both balanced accuracy and calibration-sensitive scores
+
+### `continuous_tpp`
+
+Still the strongest timing-oriented model.
+
+- best one-step family accuracy and time MAE
+- condition forecasting improved substantially over the earlier oversaturated richer setup
+- still trails the top two direct-condition specialists on pooled condition quality
 
 ### `neural_tpp`
 
-The rollout-derived condition model is still weaker than the direct-condition models.
+Still strongest on exact next-event type accuracy.
 
-- improves on `ew_pressure_high`
-- loses ground on the broader congestion-style conditions
-- remains much less calibrated than the direct-condition models, even where thresholded balanced accuracy is acceptable
-
-Suggested next step:
-
-- no new tuning priority here unless event-only forecasting becomes the primary target again
-
-### `mechanistic`
-
-Becomes more interpretable under the richer simulator.
-
-- much better on `pressure_imbalance`
-- slightly better on `ns_pressure_high`
-- worse on `congested` and `severe_queue`
-
-This suggests the mechanistic model is good at coarse directional structure, but weaker at capturing exact queue growth under bursty arrivals and lane-specific service bottlenecks.
-
-Suggested next step:
-
-- explicitly model nonstationary arrival pulses if we want this baseline to stay competitive on congestion-style conditions
+- good event model
+- much weaker condition model
+- still badly behind on probabilistic condition quality because conditions are derived indirectly from rollout
 
 ## Main Takeaways
 
-- The richer simulator does distinguish the models more meaningfully than the earlier baseline simulator.
-- The direct-condition learned models still lead overall, so the main modeling conclusion survives the richer environment.
-- The condition tasks are no longer uniformly hard:
-  - congestion-style conditions got harder
-  - corridor-asymmetry conditions became more structured
-- `multitask_neural_tpp` is now the clearest “best default” condition model.
-- `continuous_tpp` has a more specialized niche: strongest timing model, and now also strongest on `pressure_imbalance`.
+- The simulator rebalance was worth it.
+- The richer benchmark is now less saturated and more diagnostic.
+- `neuro_symbolic_tpp` is now the best overall condition forecaster on the main rebalanced richer full benchmark.
+- `transformer_tpp` remains the strongest purely neural condition model.
+- `continuous_tpp` remains the best timing model.
+- `neural_tpp` remains best on exact next-event type accuracy, which keeps the event-versus-condition split very clear.
 
 ## Recommended Next Model Work
 
-1. Improve `multitask_neural_tpp` on short-horizon `congested` and `severe_queue`.
-2. Improve `continuous_tpp` on `ns_pressure_high` and congestion-style condition heads.
-3. Use `pressure_imbalance` as a targeted evaluation slice when tuning `continuous_tpp`, since that is where it now clearly adds value.
+1. Compare `neuro_symbolic_tpp` and `transformer_tpp` more deeply on calibration and per-condition failure cases.
+2. Keep `continuous_tpp` as the main timing specialist rather than forcing it to win the condition task too.
+3. Expand the simulator again with turning movements and spillback-style constraints before introducing another new model family.

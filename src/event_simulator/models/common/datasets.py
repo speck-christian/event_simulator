@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import math
 import random
+import time
 from pathlib import Path
 from typing import Any
 
@@ -52,6 +53,26 @@ class LearnedTPPBaseline(Predictor):
         for key, value in batch.items():
             moved[key] = value.to(device) if isinstance(value, torch.Tensor) else value
         return moved
+
+    def training_log(self, message: str) -> None:
+        print(f"[train:{getattr(self, 'name', self.__class__.__name__)}] {message}", flush=True)
+
+    def training_epoch_start(self) -> float:
+        return time.perf_counter()
+
+    def training_epoch_end(
+        self,
+        epoch_index: int,
+        total_epochs: int,
+        epoch_start: float,
+        mean_loss: float,
+        extra: str | None = None,
+    ) -> None:
+        elapsed = time.perf_counter() - epoch_start
+        suffix = f" {extra}" if extra else ""
+        self.training_log(
+            f"epoch {epoch_index}/{total_epochs} done in {elapsed:.1f}s mean_loss={mean_loss:.4f}{suffix}"
+        )
 
     def split_train_validation_samples(
         self,

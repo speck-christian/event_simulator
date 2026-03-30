@@ -18,6 +18,7 @@ from event_simulator.models import (
     MechanisticBaseline,
     MultitaskNeuralTPPBaseline,
     NeuralTPPBaseline,
+    NeuroSymbolicTPPBaseline,
     TransformerTPPBaseline,
     TransitionBaseline,
 )
@@ -54,7 +55,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--models",
         default="all",
-        help="Comma-separated model names to run, or 'all'. Options: global_rate,transition,mechanistic,neural_tpp,multitask_neural_tpp,continuous_tpp,transformer_tpp",
+        help="Comma-separated model names to run, or 'all'. Options: global_rate,transition,mechanistic,neural_tpp,multitask_neural_tpp,continuous_tpp,transformer_tpp,neuro_symbolic_tpp",
     )
     return parser.parse_args()
 
@@ -86,6 +87,7 @@ def main() -> None:
         "multitask_neural_tpp": MultitaskNeuralTPPBaseline(context_len=args.context_len, epochs=args.epochs, device=args.device),
         "continuous_tpp": ContinuousTPPBaseline(context_len=args.context_len, epochs=args.epochs, device=args.device),
         "transformer_tpp": TransformerTPPBaseline(context_len=args.context_len, epochs=args.epochs, device=args.device),
+        "neuro_symbolic_tpp": NeuroSymbolicTPPBaseline(context_len=args.context_len, epochs=args.epochs, device=args.device),
     }
     if args.models == "all":
         selected_names = list(available_models.keys())
@@ -124,11 +126,19 @@ def main() -> None:
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "model_comparison.json").write_text(json.dumps(report, indent=2) + "\n")
     (output_dir / "model_comparison.html").write_text(build_dashboard_html(report))
-    (output_dir / "traffic_predictions.html").write_text(build_prediction_dashboard_html(report, eval_runs[0], cached_runs=eval_runs))
+    dashboard_models = {name: available_models[name] for name in selected_names}
+    (output_dir / "traffic_predictions.html").write_text(
+        build_prediction_dashboard_html(
+            report,
+            eval_runs[0],
+            cached_runs=runs,
+            model_instances=dashboard_models,
+        )
+    )
     print(f"[compare_models] wrote reports to {output_dir}", flush=True)
     for name in selected_names:
         model = available_models[name]
-        if hasattr(model, "save_checkpoint") and model.name in {"neural_tpp", "multitask_neural_tpp", "continuous_tpp", "transformer_tpp"}:
+        if hasattr(model, "save_checkpoint") and model.name in {"neural_tpp", "multitask_neural_tpp", "continuous_tpp", "transformer_tpp", "neuro_symbolic_tpp"}:
             model.save_checkpoint(checkpoint_dir / f"{model.name}.pt")
             print(f"[compare_models] saved checkpoint for {model.name}", flush=True)
     print(json.dumps({name: output["metrics"] for name, output in model_outputs.items()}, indent=2))

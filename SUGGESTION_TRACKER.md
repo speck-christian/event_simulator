@@ -73,6 +73,24 @@ This file tracks major modeling and evaluation suggestions from the project conv
 - Transformer loss-weight refinement:
   Reducing the transformer condition-loss weight from `0.10` to `0.08` recovered event-family accuracy on the richer adaptive `60/20` benchmark while preserving the condition-forecast gains from the dedicated condition trunk.
 
+- Learned-model checkpointing:
+  Learned-model training now saves reloadable checkpoints, vocab state, calibration artifacts, and thresholds under the benchmark output directory so later eval-only and dashboard/report work do not require retraining from scratch.
+
+- Long-run progress logging:
+  The training and evaluation CLIs now print fit/eval progress per model and per evaluation run, which makes long local or Colab runs much easier to monitor.
+
+- Rebalanced richer simulator:
+  The richer simulator profile was retuned to reduce persistent overload by lowering base demand, softening burstiness, slightly improving green-phase service, and making adaptive control more responsive to current demand. This keeps the richer profile realistic without making congestion-style labels almost always positive.
+
+- Rebalanced richer full benchmark:
+  The main adaptive richer `60/20` benchmark has been rerun locally after the simulator rebalance, with checkpoints and refreshed dashboards written under `analysis/adaptive_richer_60_20_rebalanced_full`. In that current benchmark, `transformer_tpp` is the strongest overall condition forecaster, `continuous_tpp` is strongest on timing and family accuracy, and `neural_tpp` is strongest on exact type accuracy.
+
+- Neuro-symbolic TPP prototype:
+  Added `neuro_symbolic_tpp`, a rule-guided GRU temporal point process with an explicit symbolic condition-logic branch plus a neural residual head. A focused smoke benchmark under `analysis/neuro_symbolic_smoke` ran end to end with checkpoints and showed promising condition performance, outperforming the smoke-run `multitask_neural_tpp` and `transformer_tpp` on mean fixed-horizon condition balanced accuracy.
+
+- Neuro-symbolic full benchmark promotion:
+  The full adaptive richer `60/20` run for `neuro_symbolic_tpp` completed under `analysis/adaptive_richer_60_20_neuro_symbolic_only`, and the main benchmark comparison/report artifacts were updated so `neuro_symbolic_tpp` is included in the current leaderboard.
+
 ## Pending
 
 - Probability-aware condition evaluation:

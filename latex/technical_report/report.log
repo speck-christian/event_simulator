@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Homebrew) (preloaded format=pdflatex 2026.3.4)  29 MAR 2026 12:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Homebrew) (preloaded format=pdflatex 2026.3.4)  29 MAR 2026 19:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**latex/technical_report/report.tex
-(./latex/technical_report/report.tex
+**report.tex
+(./report.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 
@@ -914,7 +914,7 @@ dlayer/tikz/libraries/tikzlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 26.
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 52
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 53
 .
 
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/lm/t1lmr.fd
@@ -924,27 +924,27 @@ File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ackend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count347
-) (latex/technical_report/report.aux)
+) (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -980,8 +980,8 @@ LaTeX Font Info:    ... okay on input line 52.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 52.
-(latex/technical_report/report.out) (latex/technical_report/report.out)
+Package hyperref Info: Link coloring ON on input line 53.
+(./report.out) (./report.out)
 \@outlinefile=\write4
 \openout4 = `report.out'.
 
@@ -1018,47 +1018,47 @@ s been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 5
-5.
+6.
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 5
-5.
+6.
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-55.
+56.
 
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-55.
+56.
 
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 55.
+(Font)              <12> on input line 56.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 55.
+(Font)              <8> on input line 56.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 55.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 55.
+(Font)              <6> on input line 56.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 56.
 
 
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/amsfonts/umsa
 .fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 55.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 56.
 
 
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/amsfonts/umsb
 .fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (latex/technical_report/report.toc
+) (./report.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 4.
 )
@@ -1071,13 +1071,13 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 /pdftex.map}{/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/enc/d
 vips/lm/lm-ec.enc}]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 6
-2.
+3.
 
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 6
-5.
+6.
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [2
@@ -1088,47 +1088,46 @@ lm/lm-mathit.enc}{/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/
 enc/dvips/lm/lm-rm.enc}{/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/
 fonts/enc/dvips/lm/lm-mathsy.enc}{/opt/homebrew/Cellar/texlive/20260301/share/t
 exmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
-Overfull \hbox (0.27443pt too wide) in paragraph at lines 133--134
+Overfull \hbox (0.27443pt too wide) in paragraph at lines 134--135
 \T1/lmr/m/n/10.95 The richer sim-u-la-tor keeps the same event-driven state-tra
 nsition struc-ture, but changes the stochas-
  []
 
-[3] [4] [5] [6] [7] [8] [9] [10] [11] [12]
-Overfull \hbox (14.79492pt too wide) in paragraph at lines 636--638
+[3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13]
+Overfull \hbox (14.79492pt too wide) in paragraph at lines 711--713
 \T1/lmr/m/n/10.95 Family ac-cu-racy is coarser. If $[]\OT1/lmr/m/n/10.95 (\OML/
 lmm/m/it/10.95 m\OT1/lmr/m/n/10.95 )$ \T1/lmr/m/n/10.95 maps an event la-bel to
  one of {\T1/lmtt/m/n/10.95 phase_change\T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 
 vehicle_arrival\T1/lmr/m/n/10.95 ,
  []
 
-[13]
-Package pgfplots info on input line 733: Using 'lua backend=false' for axis: x 
+[14]
+Package pgfplots info on input line 808: Using 'lua backend=false' for axis: x 
 coord trafo unsupported.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 741.
- [14]
-Package pgfplots info on input line 764: Using 'lua backend=false' for axis: x 
-coord trafo unsupported.
-Package pgfplots info on input line 803: Using 'lua backend=false' for axis: x 
-coord trafo unsupported.
+(Font)              <5> on input line 816.
  [15]
-Package pgfplots info on input line 831: Using 'lua backend=false' for axis: x 
+Package pgfplots info on input line 839: Using 'lua backend=false' for axis: x 
 coord trafo unsupported.
-Package pgfplots info on input line 858: Using 'lua backend=false' for axis: x 
+Package pgfplots info on input line 873: Using 'lua backend=false' for axis: x 
 coord trafo unsupported.
  [16]
-Package pgfplots info on input line 914: Using 'lua backend=false' for axis: x 
+Package pgfplots info on input line 901: Using 'lua backend=false' for axis: x 
+coord trafo unsupported.
+Package pgfplots info on input line 928: Using 'lua backend=false' for axis: x 
 coord trafo unsupported.
  [17]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 934.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 934.
- [18]
-Package pgfplots info on input line 975: Using 'lua backend=false' for axis: x 
+Package pgfplots info on input line 985: Using 'lua backend=false' for axis: x 
 coord trafo unsupported.
- [19] [20] [21] [22] [23]
-(latex/technical_report/report.aux)
+ [18]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 1005.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 1005.
+ [19]
+Package pgfplots info on input line 1048: Using 'lua backend=false' for axis: x
+ coord trafo unsupported.
+ [20] [21] [22] [23] [24] (./report.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -1137,13 +1136,13 @@ Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 3A110BDDB14337FBA4BF31A5C6B2E13E;2857.
  ) 
 Here is how much of TeX's memory you used:
- 34550 strings out of 467525
- 811037 string characters out of 5408440
- 1319259 words of memory out of 5000000
- 62835 multiletter control sequences out of 15000+600000
+ 34558 strings out of 467525
+ 810857 string characters out of 5408440
+ 1319637 words of memory out of 5000000
+ 62840 multiletter control sequences out of 15000+600000
  706033 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 102i,19n,107p,987b,2351s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 102i,19n,107p,1222b,2351s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/type1/public/lm
 /lmbx10.pfb></opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/type1
 /public/lm/lmbx12.pfb></opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/f
@@ -1160,10 +1159,10 @@ ype1/public/lm/lmsy10.pfb></opt/homebrew/Cellar/texlive/20260301/share/texmf-di
 st/fonts/type1/public/lm/lmsy8.pfb></opt/homebrew/Cellar/texlive/20260301/share
 /texmf-dist/fonts/type1/public/lm/lmtt10.pfb></opt/homebrew/Cellar/texlive/2026
 0301/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on latex/technical_report/report.pdf (23 pages, 332995 bytes).
+Output written on report.pdf (24 pages, 338935 bytes).
 PDF statistics:
- 329 PDF objects out of 1000 (max. 8388607)
- 270 compressed objects within 3 object streams
- 69 named destinations out of 1000 (max. 500000)
+ 338 PDF objects out of 1000 (max. 8388607)
+ 278 compressed objects within 3 object streams
+ 73 named destinations out of 1000 (max. 500000)
  149 words of extra memory for PDF output out of 10000 (max. 10000000)
 

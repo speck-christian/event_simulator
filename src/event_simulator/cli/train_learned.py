@@ -12,7 +12,13 @@ from event_simulator.evaluation import (
     evaluate_model,
     load_or_generate_runs,
 )
-from event_simulator.models import ContinuousTPPBaseline, MultitaskNeuralTPPBaseline, NeuralTPPBaseline, TransformerTPPBaseline
+from event_simulator.models import (
+    ContinuousTPPBaseline,
+    MultitaskNeuralTPPBaseline,
+    NeuralTPPBaseline,
+    NeuroSymbolicTPPBaseline,
+    TransformerTPPBaseline,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -42,8 +48,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--device", default="auto", help="Torch device for learned models: auto, cpu, cuda, or mps")
     parser.add_argument(
         "--models",
-        default="neural_tpp,multitask_neural_tpp,continuous_tpp,transformer_tpp",
-        help="Comma-separated learned model names to run. Options: neural_tpp,multitask_neural_tpp,continuous_tpp,transformer_tpp",
+        default="neural_tpp,multitask_neural_tpp,continuous_tpp,transformer_tpp,neuro_symbolic_tpp",
+        help="Comma-separated learned model names to run. Options: neural_tpp,multitask_neural_tpp,continuous_tpp,transformer_tpp,neuro_symbolic_tpp",
     )
     return parser.parse_args()
 
@@ -95,6 +101,12 @@ def main() -> None:
             batch_size=args.batch_size,
             device=args.device,
         ),
+        "neuro_symbolic_tpp": NeuroSymbolicTPPBaseline(
+            context_len=args.context_len,
+            epochs=args.epochs,
+            batch_size=args.batch_size,
+            device=args.device,
+        ),
     }
     selected_names = [name.strip() for name in args.models.split(",") if name.strip()]
     unknown = [name for name in selected_names if name not in available_models]
@@ -139,7 +151,15 @@ def main() -> None:
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "model_comparison.json").write_text(json.dumps(report, indent=2) + "\n")
     (output_dir / "model_comparison.html").write_text(build_dashboard_html(report))
-    (output_dir / "traffic_predictions.html").write_text(build_prediction_dashboard_html(report, eval_runs[0], cached_runs=eval_runs))
+    dashboard_models = {name: available_models[name] for name in selected_names}
+    (output_dir / "traffic_predictions.html").write_text(
+        build_prediction_dashboard_html(
+            report,
+            eval_runs[0],
+            cached_runs=runs,
+            model_instances=dashboard_models,
+        )
+    )
     print(f"[train_learned] wrote reports to {output_dir}", flush=True)
     checkpoint_manifest: dict[str, str] = {}
     for name in selected_names:

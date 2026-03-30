@@ -3,8 +3,17 @@ from __future__ import annotations
 import json
 from typing import Any
 
+from event_simulator.models.base import Predictor
 from event_simulator.models.common import ReplayState
-from event_simulator.models.common.conditions import CONDITION_NAMES, condition_flags
+from event_simulator.models.common.conditions import (
+    CONDITION_NAMES,
+    CONGESTED_THRESHOLD,
+    EW_PRESSURE_THRESHOLD,
+    NS_PRESSURE_THRESHOLD,
+    PRESSURE_IMBALANCE_THRESHOLD,
+    SEVERE_QUEUE_THRESHOLD,
+    condition_flags,
+)
 
 
 MODEL_COLORS = {
@@ -15,6 +24,7 @@ MODEL_COLORS = {
     "multitask_neural_tpp": "#d15a2e",
     "continuous_tpp": "#2466d1",
     "transformer_tpp": "#8f3bb8",
+    "neuro_symbolic_tpp": "#5b8c2a",
 }
 
 CONDITION_DESCRIPTIONS = {
@@ -81,7 +91,57 @@ def build_example_contexts(run: dict[str, Any]) -> list[dict[str, Any]]:
     return contexts
 
 
-def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[str, Any], cached_runs: list[dict[str, Any]] | None = None) -> str:
+def build_model_seed_predictions(
+    models: dict[str, Predictor],
+    runs: list[dict[str, Any]],
+) -> dict[str, dict[str, list[dict[str, Any]]]]:
+    from .metrics import rollout_predicted_state_until_time
+
+    payload: dict[str, dict[str, list[dict[str, Any]]]] = {}
+    for run in runs:
+        seed_key = str(int(run["seed"]))
+        payload[seed_key] = {}
+        for model_name, model in models.items():
+            state = ReplayState()
+            predictions: list[dict[str, Any]] = []
+            events = run["events"]
+            duration = float(run["summary"]["duration_seconds"])
+            for current_event, _next_event in zip(events, events[1:]):
+                state.update(current_event, run["summary"])
+                direct_predictions = model.predict_time_conditions(state, run["summary"], list(HORIZONS))
+                item = {
+                    "context_time": round(float(state.current_time), 3),
+                    "horizons": {},
+                }
+                for horizon in HORIZONS:
+                    horizon_key = f"{int(horizon)}s"
+                    target_time = state.current_time + horizon
+                    if target_time > duration:
+                        item["horizons"][horizon_key] = {
+                            "flags": {name: None for name in CONDITION_NAMES},
+                            "scores": {name: None for name in CONDITION_NAMES},
+                        }
+                        continue
+                    predicted_flags = direct_predictions.get(horizon_key) if direct_predictions is not None else None
+                    if predicted_flags is None:
+                        predicted_state = rollout_predicted_state_until_time(model, state, run["summary"], target_time)
+                        predicted_flags = condition_flags(predicted_state)
+                    item["horizons"][horizon_key] = {
+                        "flags": {name: bool(predicted_flags[name]) for name in CONDITION_NAMES},
+                        "scores": {name: (1.0 if predicted_flags[name] else 0.0) for name in CONDITION_NAMES},
+                    }
+                predictions.append(item)
+            payload[seed_key][model_name] = predictions
+    return payload
+
+
+def build_prediction_dashboard_html(
+    report: dict[str, Any],
+    example_run: dict[str, Any],
+    cached_runs: list[dict[str, Any]] | None = None,
+    model_instances: dict[str, Predictor] | None = None,
+    seed_predictions: dict[str, dict[str, list[dict[str, Any]]]] | None = None,
+) -> str:
     runs_for_dashboard = cached_runs or [example_run]
     run_payload = {}
     seed_order: list[int] = []
@@ -106,6 +166,7 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
         "seed_order": seed_order,
         "runs": run_payload,
         "models": report["models"],
+        "seed_predictions": seed_predictions or (build_model_seed_predictions(model_instances, runs_for_dashboard) if model_instances else {}),
         "model_colors": MODEL_COLORS,
         "condition_descriptions": CONDITION_DESCRIPTIONS,
         "condition_names": CONDITION_NAMES,
@@ -344,10 +405,22 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
       inset: auto 0 0 0;
       width: 100%;
     }}
+    .approach-band.north .approach-fill {{
+      inset: auto 0 0 0;
+    }}
+    .approach-band.south .approach-fill {{
+      inset: 0 0 auto 0;
+    }}
     .approach-band.west .approach-fill,
     .approach-band.east .approach-fill {{
       inset: 0 auto 0 0;
       height: 100%;
+    }}
+    .approach-band.west .approach-fill {{
+      inset: 0 0 0 auto;
+    }}
+    .approach-band.east .approach-fill {{
+      inset: 0 auto 0 0;
     }}
     .lane-label {{
       position: absolute;
@@ -505,6 +578,28 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
       border-radius: 20px;
       padding: 14px;
     }}
+    .chart-header {{
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }}
+    .chart-kicker {{
+      color: var(--muted);
+      font-size: 0.92rem;
+      letter-spacing: 0.02em;
+    }}
+    .chart-controls {{
+      display: grid;
+      gap: 10px;
+      margin-bottom: 10px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.58);
+    }}
     svg {{
       width: 100%;
       height: auto;
@@ -529,6 +624,31 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
       margin-right: 8px;
       border-radius: 50%;
       background: var(--color);
+    }}
+    .chart-tooltip {{
+      position: fixed;
+      pointer-events: none;
+      z-index: 20;
+      min-width: 170px;
+      max-width: 240px;
+      background: rgba(24,35,45,0.94);
+      color: white;
+      border-radius: 14px;
+      padding: 10px 12px;
+      box-shadow: 0 16px 30px rgba(0,0,0,0.24);
+      font-size: 0.88rem;
+      line-height: 1.45;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 120ms ease, transform 120ms ease;
+    }}
+    .chart-tooltip.visible {{
+      opacity: 1;
+      transform: translateY(0);
+    }}
+    .chart-tooltip strong {{
+      display: block;
+      margin-bottom: 2px;
     }}
     @media (max-width: 1120px) {{
       .hero, .main-grid {{ grid-template-columns: 1fr; }}
@@ -567,23 +687,17 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
             <span id="phase-name"></span>
           </div>
         </div>
-        <div class="control-box">
-          <h3>Forecast Focus</h3>
-          <div class="button-row" id="model-chips"></div>
-          <div class="button-row" id="horizon-chips" style="margin-top:10px;"></div>
-        </div>
       </div>
     </section>
 
     <section class="main-grid">
       <div class="panel viz-stack">
-        <div class="state-viz" id="state-viz"></div>
-        <div class="mini-stats">
-          <div class="mini-stat"><span>Total queue</span><strong id="total-queue"></strong></div>
-          <div class="mini-stat"><span>Max lane queue</span><strong id="max-queue"></strong></div>
-          <div class="mini-stat"><span>Phase elapsed</span><strong id="phase-elapsed"></strong></div>
+        <div class="control-box">
+          <h3>Forecast Focus</h3>
+          <div class="button-row" id="model-chips"></div>
+          <div class="button-row" id="horizon-chips" style="margin-top:10px;"></div>
         </div>
-        <div class="congestion-stack" id="congestion-stack"></div>
+        <div class="state-viz" id="state-viz"></div>
       </div>
 
       <div class="panel side-stack">
@@ -592,25 +706,31 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
           <p class="lede">Each condition is shown as a three-row block so you can compare actual now, actual future at the selected horizon, and the selected model's predicted future in one place.</p>
           <svg id="interleaved-condition-timeline" viewBox="0 0 980 620" preserveAspectRatio="none"></svg>
         </div>
-        <div class="skill-card">
-          <div class="skill-header">
-            <div>
-              <h3 id="selected-model-title"></h3>
-              <p class="lede" id="selected-model-desc"></p>
-            </div>
-            <div class="skill-metric" id="selected-horizon-title"></div>
-          </div>
-          <div class="skill-grid" id="skill-grid"></div>
-        </div>
       </div>
     </section>
 
     <section class="panel chart-card">
-      <h2>Model Comparison For Selected Horizon</h2>
-      <p class="lede">Balanced accuracy by condition for the selected future horizon. This compares condition skill directly across models on the same target definition.</p>
+      <div class="chart-header">
+        <div>
+          <h2>Model Comparison For Selected Horizon</h2>
+          <p class="lede">Balanced accuracy by condition for an independently selected horizon and model subset. This panel is separate from the animation and timeline controls above.</p>
+        </div>
+        <div class="chart-kicker" id="comparison-horizon-label"></div>
+      </div>
+      <div class="chart-controls">
+        <div class="row">
+          <span><strong>Comparison horizon</strong></span>
+          <div class="button-row" id="comparison-horizon-chips"></div>
+        </div>
+        <div class="row">
+          <span><strong>Models in chart</strong></span>
+          <div class="button-row" id="comparison-model-chips"></div>
+        </div>
+      </div>
       <svg id="comparison-chart" viewBox="0 0 980 320" preserveAspectRatio="none"></svg>
     </section>
   </div>
+  <div class="chart-tooltip" id="chart-tooltip"></div>
 
   <script>
     const data = {data_json};
@@ -627,6 +747,11 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
     let selectedSeed = String(data.benchmark.example_seed);
     let selectedModel = modelOrder.includes("multitask_neural_tpp") ? "multitask_neural_tpp" : modelOrder[0];
     let selectedHorizon = "30s";
+    let comparisonHorizon = "30s";
+    let comparisonModels = modelOrder.filter((name) => ["neural_tpp", "multitask_neural_tpp", "continuous_tpp", "transformer_tpp", "neuro_symbolic_tpp"].includes(name));
+    if (!comparisonModels.length) {{
+      comparisonModels = [...modelOrder];
+    }}
     let selectedIndex = 0;
     let playTimer = null;
 
@@ -639,6 +764,7 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
         multitask_neural_tpp: "Multitask",
         continuous_tpp: "Continuous",
         transformer_tpp: "Transformer",
+        neuro_symbolic_tpp: "Neuro-Sym",
       }}[name] || name;
     }}
 
@@ -702,6 +828,34 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
         }});
         horizonChips.appendChild(button);
       }});
+      const comparisonHorizonChips = document.getElementById("comparison-horizon-chips");
+      horizonNames.forEach((name) => {{
+        const button = document.createElement("button");
+        button.textContent = name;
+        button.dataset.comparisonHorizon = name;
+        button.addEventListener("click", () => {{
+          comparisonHorizon = name;
+          renderAll();
+        }});
+        comparisonHorizonChips.appendChild(button);
+      }});
+      const comparisonModelChips = document.getElementById("comparison-model-chips");
+      modelOrder.forEach((name) => {{
+        const button = document.createElement("button");
+        button.textContent = shortLabel(name);
+        button.dataset.comparisonModel = name;
+        button.addEventListener("click", () => {{
+          if (comparisonModels.includes(name)) {{
+            if (comparisonModels.length > 1) {{
+              comparisonModels = comparisonModels.filter((modelName) => modelName !== name);
+            }}
+          }} else {{
+            comparisonModels = [...comparisonModels, name];
+          }}
+          renderAll();
+        }});
+        comparisonModelChips.appendChild(button);
+      }});
     }}
 
     function togglePlay() {{
@@ -745,6 +899,20 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
           button.style.color = "var(--ink)";
         }}
       }});
+      document.querySelectorAll("#comparison-horizon-chips button").forEach((button) => {{
+        const active = button.dataset.comparisonHorizon === comparisonHorizon;
+        button.classList.toggle("active", active);
+        button.style.background = active ? "#18232d" : "rgba(255,255,255,0.78)";
+        button.style.color = active ? "white" : "var(--ink)";
+      }});
+      document.querySelectorAll("#comparison-model-chips button").forEach((button) => {{
+        const name = button.dataset.comparisonModel;
+        const active = comparisonModels.includes(name);
+        button.classList.toggle("active", active);
+        button.style.background = active ? (data.model_colors[name] || "#444") : "rgba(255,255,255,0.78)";
+        button.style.color = active ? "white" : "var(--ink)";
+        button.style.opacity = active ? "1" : "0.7";
+      }});
     }}
 
     function renderStateViz() {{
@@ -764,10 +932,10 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
           <div class="approach-fill" style="height:${{(queueNorm("north") * 100).toFixed(1)}}%; background:linear-gradient(180deg, rgba(207,90,50,0.35), rgba(207,90,50,0.95));"></div>
         </div>
         <div class="approach-band south">
-          <div class="approach-fill" style="height:${{(queueNorm("south") * 100).toFixed(1)}}%; background:linear-gradient(180deg, rgba(198,134,28,0.35), rgba(198,134,28,0.95));"></div>
+          <div class="approach-fill" style="height:${{(queueNorm("south") * 100).toFixed(1)}}%; background:linear-gradient(0deg, rgba(198,134,28,0.35), rgba(198,134,28,0.95));"></div>
         </div>
         <div class="approach-band west">
-          <div class="approach-fill" style="width:${{(queueNorm("west") * 100).toFixed(1)}}%; background:linear-gradient(90deg, rgba(111,81,178,0.35), rgba(111,81,178,0.95));"></div>
+          <div class="approach-fill" style="width:${{(queueNorm("west") * 100).toFixed(1)}}%; background:linear-gradient(270deg, rgba(111,81,178,0.35), rgba(111,81,178,0.95));"></div>
         </div>
         <div class="approach-band east">
           <div class="approach-fill" style="width:${{(queueNorm("east") * 100).toFixed(1)}}%; background:linear-gradient(90deg, rgba(45,127,167,0.35), rgba(45,127,167,0.95));"></div>
@@ -777,51 +945,6 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
         <div class="lane-label east">East · q${{context.queue_state.east}}</div>
         <div class="lane-label west">West · q${{context.queue_state.west}}</div>
       `;
-      document.getElementById("total-queue").textContent = context.total_queue;
-      document.getElementById("max-queue").textContent = context.max_queue;
-      document.getElementById("phase-elapsed").textContent = `${{context.phase_elapsed_s.toFixed(1)}}s`;
-    }}
-
-    function formatStatusPill(value) {{
-      if (value === null || value === undefined) {{
-        return `<span class="status-chip na">n/a</span>`;
-      }}
-      return value
-        ? `<span class="status-chip on">congested</span>`
-        : `<span class="status-chip off">not congested</span>`;
-    }}
-
-    function renderCongestionStack() {{
-      const context = currentContext();
-      const hasPredictions = selectedSeed === String(data.example_prediction_seed);
-      const predictions = hasPredictions ? (data.models[selectedModel].long_horizon.example_time_condition_predictions || []) : [];
-      const predictedFlags = hasPredictions ? (predictions[selectedIndex]?.horizons?.[selectedHorizon]?.flags || null) : null;
-      const currentCongested = context.total_queue >= 12;
-      const futureCongested = context.time_conditions[selectedHorizon]?.congested ?? null;
-      const predictedCongested = predictedFlags ? predictedFlags.congested : null;
-      document.getElementById("congestion-stack").innerHTML = `
-        <div class="congestion-card">
-          <div>
-            <strong>Actual Congestion Now</strong>
-            <span>Uses the current queue state at this exact context. In this simulator, that means total queue \u2265 12 right now.</span>
-          </div>
-          ${{formatStatusPill(currentCongested)}}
-        </div>
-        <div class="congestion-card">
-          <div>
-            <strong>Actual Congestion At ${{selectedHorizon}}</strong>
-            <span>This is the true future congestion label at the selected horizon, which can differ from the current queue if traffic is expected to drain or build.</span>
-          </div>
-          ${{formatStatusPill(futureCongested)}}
-        </div>
-        <div class="congestion-card">
-          <div>
-            <strong>${{shortLabel(selectedModel)}} Predicted Congestion At ${{selectedHorizon}}</strong>
-            <span>${{hasPredictions ? "This comes from the selected model's own future condition forecast for the same horizon." : "Per-context model future-condition forecasts are only stored for the original example seed in this benchmark artifact."}}</span>
-          </div>
-          ${{formatStatusPill(predictedCongested)}}
-        </div>
-      `;
     }}
 
     function currentConditionFlags(context) {{
@@ -830,41 +953,12 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
       const total = context.total_queue;
       const maxQueue = context.max_queue;
       return {{
-        congested: total >= 12,
-        severe_queue: maxQueue >= 6,
-        ns_pressure_high: ns >= 8,
-        ew_pressure_high: ew >= 8,
-        pressure_imbalance: Math.abs(ns - ew) >= 5,
+        congested: total >= {CONGESTED_THRESHOLD},
+        severe_queue: maxQueue >= {SEVERE_QUEUE_THRESHOLD},
+        ns_pressure_high: ns >= {NS_PRESSURE_THRESHOLD},
+        ew_pressure_high: ew >= {EW_PRESSURE_THRESHOLD},
+        pressure_imbalance: Math.abs(ns - ew) >= {PRESSURE_IMBALANCE_THRESHOLD},
       }};
-    }}
-
-    function renderModelSkill() {{
-      const model = data.models[selectedModel];
-      const stats = model.long_horizon.time_conditions[selectedHorizon];
-      document.getElementById("selected-model-title").textContent = titleLabel(selectedModel);
-      document.getElementById("selected-model-desc").textContent = model.description;
-      document.getElementById("selected-horizon-title").textContent = `Selected horizon: ${{selectedHorizon}}`;
-      const grid = document.getElementById("skill-grid");
-      grid.innerHTML = "";
-      conditionNames.forEach((name) => {{
-        const item = stats[name];
-        const row = document.createElement("div");
-        row.className = "skill-row";
-        row.innerHTML = `
-          <div>
-            <strong>${{name}}</strong>
-            <div style="color:var(--muted); font-size:0.82rem; margin-top:4px;">${{data.condition_descriptions[name]}}</div>
-          </div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:${{(item.balanced_accuracy * 100).toFixed(1)}}%; background:${{data.model_colors[selectedModel] || "#555"}};"></div>
-          </div>
-          <div style="text-align:right;">
-            <div><strong>${{item.balanced_accuracy.toFixed(3)}}</strong></div>
-            <div style="font-size:0.82rem; color:var(--muted);">Brier ${{item.brier.toFixed(3)}}</div>
-          </div>
-        `;
-        grid.appendChild(row);
-      }});
     }}
 
     function renderInterleavedConditionTimeline() {{
@@ -877,48 +971,78 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
       const right = 18;
       const rowHeight = 28;
       const conditionGap = 18;
-      const totalRows = conditionNames.length * 3;
+      const timelineModels = comparisonModels.length ? comparisonModels : [selectedModel];
+      const rowCountPerCondition = 2 + timelineModels.length;
+      const totalRows = conditionNames.length * rowCountPerCondition;
       const height = topPadding + bottomPadding + totalRows * rowHeight + Math.max(0, conditionNames.length - 1) * conditionGap;
       const innerWidth = width - left - right;
       const cellWidth = innerWidth / Math.max(1, run.contexts.length);
       const cursorX = left + selectedIndex * cellWidth + cellWidth / 2;
-      const hasPredictions = selectedSeed === String(data.example_prediction_seed);
-      const predictions = hasPredictions ? (data.models[selectedModel].long_horizon.example_time_condition_predictions || []) : [];
+      const predictionsBySeed = data.seed_predictions || {{}};
+      const modelPredictionMap = Object.fromEntries(timelineModels.map((modelName) => [
+        modelName,
+        predictionsBySeed[selectedSeed]?.[modelName]
+          || (selectedSeed === String(data.example_prediction_seed)
+            ? (data.models[modelName].long_horizon.example_time_condition_predictions || [])
+            : []),
+      ]));
       svg.setAttribute("viewBox", `0 0 ${{width}} ${{height}}`);
 
       function rowY(conditionIndex, variantIndex) {{
-        return topPadding + conditionIndex * (3 * rowHeight + conditionGap) + variantIndex * rowHeight;
+        return topPadding + conditionIndex * (rowCountPerCondition * rowHeight + conditionGap) + variantIndex * rowHeight;
       }}
 
       const rowVariants = [
         {{
           label: "actual",
+          kind: "actual",
           getValue: (context, _index, name) => currentConditionFlags(context)[name],
           trueFill: "rgba(45,127,167,0.84)",
           falseFill: "rgba(45,127,167,0.24)",
         }},
         {{
           label: "actual future",
+          kind: "future",
           getValue: (context, _index, name) => context.time_conditions[selectedHorizon][name],
           trueFill: "rgba(198,134,28,0.86)",
           falseFill: "rgba(198,134,28,0.24)",
         }},
-        {{
-          label: "predicted future",
+      ];
+      timelineModels.forEach((modelName) => {{
+        const predictions = modelPredictionMap[modelName] || [];
+        const hasPredictions = predictions.length > 0;
+        rowVariants.push({{
+          label: `${{shortLabel(modelName).toLowerCase()}} predicted`,
+          kind: "predicted",
+          modelName,
           getValue: (_context, index, name) => {{
             const predictedFlags = hasPredictions ? (predictions[index]?.horizons?.[selectedHorizon]?.flags || null) : null;
             return predictedFlags ? predictedFlags[name] : null;
           }},
-          trueFill: "rgba(111,81,178,0.86)",
-          falseFill: "rgba(111,81,178,0.24)",
-        }},
-      ];
+          trueFill: `${{(data.model_colors[modelName] || "#8f3bb8")}}dd`,
+          falseFill: `${{(data.model_colors[modelName] || "#8f3bb8")}}3d`,
+        }});
+      }});
 
       const rows = conditionNames.map((name, conditionIndex) => {{
         const titleY = rowY(conditionIndex, 0) - 8;
         const sectionTitle = `<text x="18" y="${{titleY.toFixed(1)}}" font-size="12" font-weight="700" fill="#2a3840">${{name.replaceAll("_", " ")}}</text>`;
         const variantRows = rowVariants.map((variant, variantIndex) => {{
           const y = rowY(conditionIndex, variantIndex);
+          const isSelectedFutureRow = variant.kind === "future";
+          const isSelectedModelRow = variant.kind === "predicted" && variant.modelName === selectedModel;
+          const isHighlightedRow = isSelectedFutureRow || isSelectedModelRow;
+          const labelFill = isSelectedModelRow
+            ? (data.model_colors[selectedModel] || "#8f3bb8")
+            : isSelectedFutureRow
+              ? "#ca6638"
+              : "#62707a";
+          const rowAccent = isSelectedModelRow
+            ? (data.model_colors[selectedModel] || "#8f3bb8")
+            : "#ca6638";
+          const rowBackdrop = isHighlightedRow
+            ? `<rect x="${{(left - 145).toFixed(1)}}" y="${{(y - 4).toFixed(1)}}" width="${{(width - left - right + 165).toFixed(1)}}" height="30" rx="11" fill="rgba(255,255,255,0.02)" stroke="${{rowAccent}}bb" stroke-width="2" />`
+            : "";
           const cells = run.contexts.map((context, index) => {{
             const value = variant.getValue(context, index, name);
             const fill = value === null
@@ -926,10 +1050,14 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
               : value
                 ? variant.trueFill
                 : variant.falseFill;
-            return `<rect x="${{(left + index * cellWidth + 0.5).toFixed(1)}}" y="${{y.toFixed(1)}}" width="${{Math.max(1, cellWidth - 1).toFixed(1)}}" height="22" rx="4" fill="${{fill}}" opacity="${{index === selectedIndex ? 1 : 0.86}}" />`;
+            const stroke = "none";
+            const strokeWidth = "0";
+            const opacity = index === selectedIndex ? 1 : 0.86;
+            return `<rect x="${{(left + index * cellWidth + 0.5).toFixed(1)}}" y="${{y.toFixed(1)}}" width="${{Math.max(1, cellWidth - 1).toFixed(1)}}" height="22" rx="4" fill="${{fill}}" stroke="${{stroke}}" stroke-width="${{strokeWidth}}" opacity="${{opacity}}" />`;
           }}).join("");
           return `
-            <text x="${{left - 12}}" y="${{(y + 15).toFixed(1)}}" text-anchor="end" font-size="11" fill="#62707a">${{variant.label}}</text>
+            ${{rowBackdrop}}
+            <text x="${{left - 12}}" y="${{(y + 15).toFixed(1)}}" text-anchor="end" font-size="11" font-weight="${{isHighlightedRow ? 700 : 500}}" fill="${{labelFill}}">${{variant.label}}</text>
             ${{cells}}
           `;
         }}).join("");
@@ -940,13 +1068,15 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
         <rect x="0" y="0" width="${{width}}" height="${{height}}" fill="rgba(255,255,255,0.6)" />
         <line x1="${{cursorX.toFixed(1)}}" y1="${{(topPadding - 10).toFixed(1)}}" x2="${{cursorX.toFixed(1)}}" y2="${{(height - bottomPadding + 4).toFixed(1)}}" stroke="rgba(24,35,45,0.42)" stroke-dasharray="5 5" />
         ${{rows}}
-        <text x="${{left}}" y="18" font-size="12" fill="#62707a">Per condition: actual now, true future at ${{selectedHorizon}}, then ${{shortLabel(selectedModel)}} predicted future${{hasPredictions ? "" : " (n/a for this cached seed)"}}.</text>
+        <text x="${{left}}" y="18" font-size="12" font-weight="700" fill="#2a3840">Focus: ${{selectedHorizon}} horizon · ${{shortLabel(selectedModel)}}</text>
+        <text x="${{left}}" y="34" font-size="11" fill="#62707a">Per condition: actual now, highlighted true future at ${{selectedHorizon}}, then predicted future for ${{timelineModels.map((modelName) => shortLabel(modelName)).join(", ")}}.</text>
         <text x="${{width - right}}" y="${{height - 10}}" text-anchor="end" font-size="11" fill="#62707a">example-run context index</text>
       `;
     }}
 
     function renderComparisonChart() {{
       const svg = document.getElementById("comparison-chart");
+      const tooltip = document.getElementById("chart-tooltip");
       const width = 980;
       const height = 320;
       const margin = {{ top: 28, right: 18, bottom: 44, left: 52 }};
@@ -954,9 +1084,17 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
       const innerHeight = height - margin.top - margin.bottom;
       const groups = conditionNames;
       const barGroupWidth = innerWidth / groups.length;
-      const activeModels = modelOrder.filter((name) => data.models[name].long_horizon?.time_conditions?.[selectedHorizon]);
+      const activeModels = comparisonModels.filter((name) => data.models[name].long_horizon?.time_conditions?.[comparisonHorizon]);
+      if (!activeModels.length) {{
+        svg.innerHTML = `
+          <rect x="0" y="0" width="${{width}}" height="${{height}}" fill="rgba(255,255,255,0.6)" />
+          <text x="${{width / 2}}" y="${{height / 2}}" text-anchor="middle" font-size="16" fill="#62707a">Select at least one model for the comparison chart.</text>
+        `;
+        document.getElementById("comparison-horizon-label").textContent = `Interactive view: ${{comparisonHorizon}} horizon`;
+        return;
+      }}
       const barWidth = Math.min(16, (barGroupWidth - 12) / Math.max(1, activeModels.length));
-      const values = activeModels.flatMap((name) => groups.map((condition) => data.models[name].long_horizon.time_conditions[selectedHorizon][condition].balanced_accuracy));
+      const values = activeModels.flatMap((name) => groups.map((condition) => data.models[name].long_horizon.time_conditions[comparisonHorizon][condition].balanced_accuracy));
       const minVal = Math.max(0.45, Math.min(...values) - 0.03);
       const maxVal = Math.min(1.0, Math.max(...values) + 0.03);
       const y = (value) => margin.top + innerHeight - ((value - minVal) / Math.max(1e-6, maxVal - minVal)) * innerHeight;
@@ -969,32 +1107,54 @@ def build_prediction_dashboard_html(report: dict[str, Any], example_run: dict[st
       const bars = groups.map((condition, groupIndex) => {{
         const groupLeft = margin.left + groupIndex * barGroupWidth;
         const pieces = activeModels.map((name, modelIndex) => {{
-          const value = data.models[name].long_horizon.time_conditions[selectedHorizon][condition].balanced_accuracy;
+          const value = data.models[name].long_horizon.time_conditions[comparisonHorizon][condition].balanced_accuracy;
           const barHeight = Math.max(2, margin.top + innerHeight - y(value));
           const x = groupLeft + 8 + modelIndex * barWidth;
-          return `<rect x="${{x.toFixed(1)}}" y="${{y(value).toFixed(1)}}" width="${{Math.max(6, barWidth - 2).toFixed(1)}}" height="${{barHeight.toFixed(1)}}" rx="5" fill="${{data.model_colors[name] || "#666"}}" opacity="${{name === selectedModel ? 1 : 0.78}}" />`;
+          return `<rect class="comparison-bar" data-model="${{name}}" data-condition="${{condition}}" data-horizon="${{comparisonHorizon}}" data-value="${{value.toFixed(4)}}" x="${{x.toFixed(1)}}" y="${{y(value).toFixed(1)}}" width="${{Math.max(6, barWidth - 2).toFixed(1)}}" height="${{barHeight.toFixed(1)}}" rx="5" fill="${{data.model_colors[name] || "#666"}}" opacity="${{name === selectedModel ? 1 : 0.82}}" />`;
         }}).join("");
         return `
           ${{pieces}}
           <text x="${{(groupLeft + barGroupWidth / 2).toFixed(1)}}" y="${{height - 14}}" text-anchor="middle" font-size="11" fill="#62707a">${{condition.replace("_", " ")}}</text>
         `;
       }}).join("");
-      const legend = activeModels.map((name, idx) => `<tspan x="${{margin.left + (idx % 3) * 190}}" dy="${{idx < 3 ? 0 : 16}}">● ${{shortLabel(name)}}</tspan>`).join("");
       svg.innerHTML = `
         <rect x="0" y="0" width="${{width}}" height="${{height}}" fill="rgba(255,255,255,0.6)" />
         ${{grid}}
         ${{bars}}
         <text x="${{margin.left}}" y="16" font-size="12" fill="#62707a">Balanced accuracy</text>
-        <text x="${{margin.left}}" y="${{height - 70}}" font-size="11" fill="#62707a">${{selectedHorizon}} future condition forecast</text>
+        <text x="${{margin.left}}" y="${{height - 70}}" font-size="11" fill="#62707a">${{comparisonHorizon}} future condition forecast</text>
       `;
+      document.getElementById("comparison-horizon-label").textContent = `Interactive view: ${{comparisonHorizon}} horizon · ${{activeModels.length}} model${{activeModels.length === 1 ? "" : "s"}}`;
+      svg.querySelectorAll(".comparison-bar").forEach((bar) => {{
+        bar.style.cursor = "pointer";
+        bar.addEventListener("mouseenter", (event) => {{
+          const target = event.currentTarget;
+          tooltip.innerHTML = `
+            <strong>${{shortLabel(target.dataset.model)}}</strong>
+            <div>${{target.dataset.condition.replaceAll("_", " ")}}</div>
+            <div>${{target.dataset.horizon}} balanced accuracy: <strong>${{Number(target.dataset.value).toFixed(3)}}</strong></div>
+          `;
+          tooltip.classList.add("visible");
+        }});
+        bar.addEventListener("mousemove", (event) => {{
+          tooltip.style.left = `${{event.clientX + 16}}px`;
+          tooltip.style.top = `${{event.clientY + 16}}px`;
+        }});
+        bar.addEventListener("mouseleave", () => {{
+          tooltip.classList.remove("visible");
+        }});
+        bar.addEventListener("click", () => {{
+          selectedModel = bar.dataset.model;
+          renderControls();
+          renderInterleavedConditionTimeline();
+        }});
+      }});
     }}
 
     function renderAll() {{
       renderControls();
       renderStateViz();
-      renderCongestionStack();
       renderInterleavedConditionTimeline();
-      renderModelSkill();
       renderComparisonChart();
     }}
 

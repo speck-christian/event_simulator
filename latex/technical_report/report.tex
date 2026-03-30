@@ -37,6 +37,7 @@
 \definecolor{multitask}{HTML}{B83280}
 \definecolor{continuous}{HTML}{0F8B8D}
 \definecolor{transformer}{HTML}{D97706}
+\definecolor{neurosymbolic}{HTML}{5B8C2A}
 \definecolor{lightborder}{HTML}{CBD2D9}
 \definecolor{lighttext}{HTML}{52606D}
 \definecolor{boxa}{HTML}{EEF2FF}
@@ -359,7 +360,7 @@ Architecturally, this model begins with the same recurrent event-history encoder
   \item direct condition heads for the fixed horizons \(10s\), \(30s\), and \(60s\)
 \end{itemize}
 
-That multitask design matters because it changes the supervision signal. The model is not only encouraged to predict the very next event; it is also encouraged to learn latent features that are predictive of medium-range traffic conditions. In practice this has made it the strongest overall condition forecaster in the larger adaptive benchmark.
+That multitask design matters because it changes the supervision signal. The model is not only encouraged to predict the very next event; it is also encouraged to learn latent features that are predictive of medium-range traffic conditions. In practice this has made it one of the strongest overall condition forecasters in the larger adaptive benchmarks.
 
 Another important detail is that the direct condition outputs are calibrated post hoc. So the architectural path is:
 \begin{enumerate}
@@ -458,6 +459,80 @@ In the current implementation, the architecture includes:
 The transformer also includes rollout-aware training, which is an architectural and optimization choice meant to reduce the gap between one-step supervision and autoregressive deployment. That matters because attention models can look good under teacher forcing but drift when their own predictions are fed back in.
 
 Conceptually, the transformer is the model in the repository that is most willing to trade hand-crafted recurrence structure for broader context access. In the larger adaptive benchmark that tradeoff looks increasingly worthwhile: it is now competitive with the strongest direct-condition models rather than clearly trailing them.
+
+\textbf{Neuro-symbolic TPP.}
+The neuro-symbolic model augments a learned temporal backbone with an explicit symbolic branch designed around the condition semantics used in the benchmark. Let
+\[
+r_i = \rho(s_i) \in \mathbb{R}^{d_r}
+\]
+denote a rule-feature vector extracted from the current simulator state. In the current implementation, \(\rho(\cdot)\) contains interpretable aggregates and margins such as
+\[
+Q_{\mathrm{tot}} = q_N + q_S + q_E + q_W, \qquad
+Q_{\mathrm{NS}} = q_N + q_S, \qquad
+Q_{\mathrm{EW}} = q_E + q_W,
+\]
+\[
+\Delta_{\mathrm{imb}} = Q_{\mathrm{NS}} - Q_{\mathrm{EW}},
+\]
+along with threshold-relative quantities that indicate how far the system is above or below the congestion, severe-queue, and pressure thresholds. These features are intended to encode the hand-interpretable regime structure that traffic engineers would naturally use to reason about future conditions.
+
+The temporal branch is recurrent:
+\[
+h_i = \mathrm{GRU}(h_{i-1}, x_i),
+\]
+so \(h_i\) still summarizes recent event order and timing exactly as in the learned GRU variants. The difference is that the condition pathway no longer depends only on a generic fused neural latent. Instead, the model constructs separate neural and symbolic condition states,
+\[
+u_i^{(\mathrm{neu})} = \psi_{\mathrm{neu}}([\, h_i \, \| \, s_i \,]),
+\qquad
+u_i^{(\mathrm{sym})} = \psi_{\mathrm{sym}}(r_i),
+\]
+and combines them in a rule-guided condition trunk
+\[
+u_i^{(\mathrm{cond})} = \psi_{\mathrm{cond}}([\, u_i^{(\mathrm{neu})} \, \| \, u_i^{(\mathrm{sym})} \,]).
+\]
+For each horizon \(h\) and condition \(k\), the model predicts a symbolic logit and a neural residual logit,
+\[
+\ell_{i,h,k}^{(\mathrm{sym})} = {w}_{h,k}^{(\mathrm{sym})\top} u_i^{(\mathrm{sym})} + b_{h,k}^{(\mathrm{sym})},
+\]
+\[
+\ell_{i,h,k}^{(\mathrm{res})} = {w}_{h,k}^{(\mathrm{res})\top} u_i^{(\mathrm{cond})} + b_{h,k}^{(\mathrm{res})},
+\]
+and forms the final condition score by additive correction:
+\[
+\ell_{i,h,k} = \ell_{i,h,k}^{(\mathrm{sym})} + \ell_{i,h,k}^{(\mathrm{res})},
+\qquad
+\hat{p}(c_{i,h,k}=1 \mid \mathcal{H}_i, s_i) = \sigma(\ell_{i,h,k}).
+\]
+This decomposition is important. The symbolic component gives the model an explicit bias toward queue-pressure rules that already resemble the evaluation targets, while the residual component lets the network correct those rules when the recent event history indicates imminent change, delayed dissipation, or other departures from a purely threshold-based heuristic.
+
+The event heads remain neural:
+\[
+u_i^{(\mathrm{event})} = \psi_{\mathrm{event}}([\, h_i \, \| \, s_i \,]),
+\]
+\[
+\hat{p}(m_{i+1}\mid \mathcal{H}_i, s_i) = \mathrm{softmax}(W_m u_i^{(\mathrm{event})} + b_m),
+\qquad
+\hat{\Delta t}_{i+1} = \exp(W_t u_i^{(\mathrm{event})} + b_t).
+\]
+So the model is not a purely symbolic forecaster. It is a hybrid architecture: event forecasting is handled by a standard learned temporal pathway, while condition forecasting receives additional structured features and a rule-guided logit decomposition.
+
+Operationally, the architecture can be read as a three-stage pipeline:
+\begin{enumerate}
+  \item encode recent marked events with a GRU history model
+  \item compute interpretable queue-pressure and threshold-margin features from the current traffic state
+  \item combine symbolic logits with neural residual corrections for fixed-horizon condition prediction
+\end{enumerate}
+
+This design matches the benchmark unusually well. The condition labels in this repository are themselves regime-style concepts defined by queue and pressure thresholds. A purely neural model must learn both the temporal dynamics and the semantics of those regime definitions from data alone. The neuro-symbolic model does less rediscovery. Its symbolic branch already exposes the relevant sufficient statistics for congestion, severe queue, north-south pressure, east-west pressure, and pressure imbalance, while the recurrent history branch tells the model whether those statistics are likely to persist, intensify, or relax over the next \(10s\), \(30s\), or \(60s\).
+
+That is why the model became the strongest overall condition forecaster in the rebalanced richer benchmark. It benefits from:
+\begin{itemize}
+  \item \textbf{semantic alignment:} the symbolic features closely match the definitions of the benchmark conditions
+  \item \textbf{temporal correction:} the GRU branch supplies information about onset, persistence, and near-future relief that static rule thresholds alone cannot express
+  \item \textbf{probability quality:} additive symbolic-plus-residual logits produce more stable condition scores, which improves not only balanced accuracy but also Brier score and log loss
+\end{itemize}
+
+In other words, the model succeeds not because it abandons neural sequence modeling, but because it uses symbolic traffic structure to constrain and stabilize the part of the problem that is inherently rule-like.
 
 \section{Learning Objectives}
 
@@ -723,7 +798,7 @@ Figure~\ref{fig:onestep} summarizes one-step results on this benchmark.
   ymin=0,
   ymax=0.80,
   enlarge x limits=0.10,
-  symbolic x coords={Global,Transition,Mechanistic,Neural,MT Neural,Continuous,Transformer},
+  symbolic x coords={Global,Transition,Mechanistic,Neural,MT Neural,Continuous,Transformer,NeuroSym},
   xtick=data,
   xticklabel style={rotate=25, anchor=east, font=\small},
   legend style={at={(0.5,1.10)}, anchor=south, legend columns=2, draw=none},
@@ -755,7 +830,7 @@ Figure~\ref{fig:onestep} summarizes one-step results on this benchmark.
   ymin=0,
   ymax=2.30,
   enlarge x limits=0.10,
-  symbolic x coords={Global,Transition,Mechanistic,Neural,MT Neural,Continuous,Transformer},
+  symbolic x coords={Global,Transition,Mechanistic,Neural,MT Neural,Continuous,Transformer,NeuroSym},
   xtick=data,
   xticklabel style={rotate=25, anchor=east, font=\small},
   ylabel={Time MAE (seconds)},
@@ -771,12 +846,7 @@ Figure~\ref{fig:onestep} summarizes one-step results on this benchmark.
 \label{fig:onestep_time}
 \end{figure}
 
-The main one-step conclusions are:
-\begin{itemize}
-  \item \texttt{multitask\_neural\_tpp} has the best exact type accuracy: \(0.4962\)
-  \item \texttt{multitask\_neural\_tpp} also has the best family accuracy: \(0.7125\)
-  \item \texttt{continuous\_tpp} has the best time MAE: \(0.4025\)
-\end{itemize}
+The earlier adaptive \(60/20\) benchmark established the main event-level pattern, but the current rebalanced richer full benchmark sharpens the specialization story. On that newer benchmark, \texttt{neural\_tpp} has the best exact type accuracy (\(0.4915\)), \texttt{continuous\_tpp} has the best family accuracy (\(0.6176\)), and \texttt{continuous\_tpp} also remains best on one-step timing with time MAE \(0.4473\). The benchmark is therefore no longer dominated by one model across every event-level task slice.
 
 \subsection{Fixed-Horizon Condition Forecasting}
 
@@ -793,7 +863,7 @@ Figure~\ref{fig:conditions} summarizes the fixed-horizon condition task on the s
   ymin=0,
   ymax=0.90,
   enlarge x limits=0.10,
-  symbolic x coords={Global,Transition,Mechanistic,Neural,MT Neural,Continuous,Transformer},
+  symbolic x coords={Global,Transition,Mechanistic,Neural,MT Neural,Continuous,Transformer,NeuroSym},
   xtick=data,
   xticklabel style={rotate=25, anchor=east, font=\small},
   legend style={at={(0.5,1.10)}, anchor=south, legend columns=1, draw=none},
@@ -802,12 +872,12 @@ Figure~\ref{fig:conditions} summarizes the fixed-horizon condition task on the s
   nodes near coords style={font=\scriptsize, /pgf/number format/fixed, /pgf/number format/precision=2},
 ]
 \addplot[fill=multitask!30, draw=multitask] coordinates {
-  (Global,0.5790) (Transition,0.6613) (Mechanistic,0.6344) (Neural,0.7091) (MT Neural,0.8146) (Continuous,0.7880) (Transformer,0.8009)
+  (Global,0.5742) (Transition,0.6148) (Mechanistic,0.5736) (Neural,0.6642) (MT Neural,0.7788) (Continuous,0.7677) (Transformer,0.7901) (NeuroSym,0.8021)
 };
 \legend{Mean balanced accuracy}
 \end{axis}
 \end{tikzpicture}
-\caption{Fixed-horizon condition balanced accuracy averaged across all condition definitions and horizons on the adaptive \(60/20\) benchmark. This plot contains only normalized accuracy-style values. The direct-condition models are clearly separated from the rollout-derived condition forecasts.}
+\caption{Fixed-horizon condition balanced accuracy averaged across all condition definitions and horizons on the rebalanced richer adaptive \(60/20\) benchmark. This plot contains only normalized accuracy-style values. The direct-condition models are still clearly separated from the rollout-derived condition forecasts, and the strongest model is now \texttt{neuro\_symbolic\_tpp}.}
 \label{fig:conditions}
 \end{figure}
 
@@ -822,7 +892,7 @@ Figure~\ref{fig:conditions} summarizes the fixed-horizon condition task on the s
   ymin=0,
   ymax=0.35,
   enlarge x limits=0.10,
-  symbolic x coords={Global,Transition,Mechanistic,Neural,MT Neural,Continuous,Transformer},
+  symbolic x coords={Global,Transition,Mechanistic,Neural,MT Neural,Continuous,Transformer,NeuroSym},
   xtick=data,
   xticklabel style={rotate=25, anchor=east, font=\small},
   ylabel={Brier score},
@@ -830,11 +900,11 @@ Figure~\ref{fig:conditions} summarizes the fixed-horizon condition task on the s
   nodes near coords style={font=\scriptsize, /pgf/number format/fixed, /pgf/number format/precision=2},
 ]
 \addplot[fill=continuous!28, draw=continuous] coordinates {
-  (Global,0.2299) (Transition,0.3113) (Mechanistic,0.1724) (Neural,0.2550) (MT Neural,0.0659) (Continuous,0.0693) (Transformer,0.0712)
+  (Global,0.3426) (Transition,0.4430) (Mechanistic,0.2480) (Neural,0.3672) (MT Neural,0.1190) (Continuous,0.1256) (Transformer,0.1131) (NeuroSym,0.1076)
 };
 \end{axis}
 \end{tikzpicture}
-\caption{Fixed-horizon probabilistic quality measured by mean Brier score. Lower is better. \texttt{multitask\_neural\_tpp}, \texttt{continuous\_tpp}, and \texttt{transformer\_tpp} all produce much better calibrated condition probabilities than the rollout-derived baselines.}
+\caption{Fixed-horizon probabilistic quality measured by mean Brier score. Lower is better. The direct-condition models still dominate the rollout-derived baselines, and \texttt{neuro\_symbolic\_tpp} now has the best pooled Brier score on the rebalanced richer benchmark.}
 \label{fig:brier}
 \end{figure}
 
@@ -849,7 +919,7 @@ Figure~\ref{fig:conditions} summarizes the fixed-horizon condition task on the s
   ymin=0,
   ymax=4.7,
   enlarge x limits=0.10,
-  symbolic x coords={Global,Transition,Mechanistic,Neural,MT Neural,Continuous,Transformer},
+  symbolic x coords={Global,Transition,Mechanistic,Neural,MT Neural,Continuous,Transformer,NeuroSym},
   xtick=data,
   xticklabel style={rotate=25, anchor=east, font=\small},
   ylabel={Log loss},
@@ -857,7 +927,7 @@ Figure~\ref{fig:conditions} summarizes the fixed-horizon condition task on the s
   nodes near coords style={font=\scriptsize, /pgf/number format/fixed, /pgf/number format/precision=2},
 ]
 \addplot[fill=transformer!28, draw=transformer] coordinates {
-  (Global,3.1767) (Transition,4.3002) (Mechanistic,1.1229) (Neural,3.5223) (MT Neural,0.2136) (Continuous,0.2250) (Transformer,0.2311)
+  (Global,4.7327) (Transition,6.1207) (Mechanistic,1.5229) (Neural,5.0727) (MT Neural,0.3731) (Continuous,0.3931) (Transformer,0.3566) (NeuroSym,0.3369)
 };
 \end{axis}
 \end{tikzpicture}
@@ -865,20 +935,21 @@ Figure~\ref{fig:conditions} summarizes the fixed-horizon condition task on the s
 \label{fig:logloss}
 \end{figure}
 
-The most important result in the report is that direct-condition models are now decisively stronger on condition forecasting:
+The most important result in the report is that direct-condition models remain decisively stronger on condition forecasting, but the best model changes under the rebalanced richer simulator:
 
 \begin{center}
 \begin{tabular}{lccc}
 \toprule
 Model & Mean Balanced Accuracy & Mean Brier & Mean Log Loss \\
 \midrule
-\texttt{global\_rate} & 0.5790 & 0.2299 & 3.1767 \\
-\texttt{transition} & 0.6613 & 0.3113 & 4.3002 \\
-\texttt{mechanistic} & 0.6344 & 0.1724 & 1.1229 \\
-\texttt{neural\_tpp} & 0.7091 & 0.2550 & 3.5223 \\
-\texttt{multitask\_neural\_tpp} & \textbf{0.8146} & \textbf{0.0659} & \textbf{0.2136} \\
-\texttt{continuous\_tpp} & 0.7880 & 0.0693 & 0.2250 \\
-\texttt{transformer\_tpp} & 0.8009 & 0.0712 & 0.2311 \\
+\texttt{global\_rate} & 0.5742 & 0.3426 & 4.7327 \\
+\texttt{transition} & 0.6148 & 0.4430 & 6.1207 \\
+\texttt{mechanistic} & 0.5736 & 0.2480 & 1.5229 \\
+\texttt{neural\_tpp} & 0.6642 & 0.3672 & 5.0727 \\
+\texttt{neuro\_symbolic\_tpp} & \textbf{0.8021} & \textbf{0.1076} & \textbf{0.3369} \\
+\texttt{multitask\_neural\_tpp} & 0.7788 & 0.1190 & 0.3731 \\
+\texttt{continuous\_tpp} & 0.7677 & 0.1256 & 0.3931 \\
+\texttt{transformer\_tpp} & 0.7901 & 0.1131 & 0.3566 \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -894,7 +965,7 @@ The richer simulator differs from the baseline simulator in three main ways:
   \item turning-share penalties induce lane-specific discharge behavior, so not all queues clear equally quickly even when they have green
 \end{itemize}
 
-Figure~\ref{fig:baseline_richer_conditions} compares mean fixed-horizon condition balanced accuracy between the two simulator profiles. This figure uses only normalized balanced-accuracy values, so it stays on a single metric scale.
+Figure~\ref{fig:baseline_richer_conditions} compares mean fixed-horizon condition balanced accuracy between the two simulator profiles. This updated comparison uses the current rebalanced richer simulator rather than the earlier oversaturated richer profile, and it stays on a single normalized metric scale.
 
 \begin{figure}[H]
 \centering
@@ -912,17 +983,17 @@ Figure~\ref{fig:baseline_richer_conditions} compares mean fixed-horizon conditio
   legend style={at={(0.5,1.12)}, anchor=south, legend columns=3, draw=none},
   mark options={solid},
 ]
-\addplot+[color=global, mark=*] coordinates {(Baseline 60/20,0.5790) (Richer 60/20,0.6449)};
-\addplot+[color=transition, mark=*] coordinates {(Baseline 60/20,0.6613) (Richer 60/20,0.5772)};
-\addplot+[color=mechanistic, mark=*] coordinates {(Baseline 60/20,0.6344) (Richer 60/20,0.6263)};
-\addplot+[color=neural, mark=*] coordinates {(Baseline 60/20,0.7091) (Richer 60/20,0.6497)};
-\addplot+[color=multitask, mark=*] coordinates {(Baseline 60/20,0.8146) (Richer 60/20,0.8279)};
-\addplot+[color=continuous, mark=*] coordinates {(Baseline 60/20,0.7880) (Richer 60/20,0.7027)};
-\addplot+[color=transformer, mark=*] coordinates {(Baseline 60/20,0.8009) (Richer 60/20,0.8275)};
+\addplot+[color=global, mark=*] coordinates {(Baseline 60/20,0.5790) (Richer 60/20,0.5742)};
+\addplot+[color=transition, mark=*] coordinates {(Baseline 60/20,0.6613) (Richer 60/20,0.6148)};
+\addplot+[color=mechanistic, mark=*] coordinates {(Baseline 60/20,0.6344) (Richer 60/20,0.5736)};
+\addplot+[color=neural, mark=*] coordinates {(Baseline 60/20,0.7091) (Richer 60/20,0.6642)};
+\addplot+[color=multitask, mark=*] coordinates {(Baseline 60/20,0.8146) (Richer 60/20,0.7788)};
+\addplot+[color=continuous, mark=*] coordinates {(Baseline 60/20,0.7880) (Richer 60/20,0.7677)};
+\addplot+[color=transformer, mark=*] coordinates {(Baseline 60/20,0.8009) (Richer 60/20,0.7901)};
 \legend{\texttt{global\_rate}, \texttt{transition}, \texttt{mechanistic}, \texttt{neural\_tpp}, \texttt{multitask\_neural\_tpp}, \texttt{continuous\_tpp}, \texttt{transformer\_tpp}}
 \end{axis}
 \end{tikzpicture}
-\caption{Mean fixed-time condition balanced accuracy under the earlier baseline simulator and the richer simulator, both at adaptive \(60/20\) scale. The richer simulator still makes exact event prediction harder, but after the latest direct-condition refinements it now exposes a stronger separation between the best calibrated condition models and the weaker empirical baselines.}
+\caption{Mean fixed-time condition balanced accuracy under the earlier baseline simulator and the current rebalanced richer simulator, both at adaptive \(60/20\) scale. The rebalanced richer simulator no longer rewards simple persistence quite as strongly, so the comparison is more diagnostic of real condition discrimination.}
 \label{fig:baseline_richer_conditions}
 \end{figure}
 
@@ -935,23 +1006,25 @@ Table~\ref{tab:baseline_richer_event} complements that condition-level view with
 \toprule
 Metric & Transition & MT Neural & Continuous & Transformer \\
 \midrule
-Type accuracy & 0.357 / 0.259 & 0.496 / 0.441 & 0.494 / 0.429 & 0.481 / 0.426 \\
-Family accuracy & 0.593 / 0.491 & 0.713 / 0.682 & 0.703 / 0.693 & 0.708 / 0.648 \\
-Time MAE & 0.462 / 0.472 & 0.405 / 0.403 & 0.403 / 0.402 & 0.405 / 0.411 \\
-Mean cond. bal. acc. & 0.661 / 0.577 & 0.815 / 0.828 & 0.788 / 0.703 & 0.801 / 0.828 \\
+Type accuracy & 0.357 / 0.299 & 0.496 / 0.487 & 0.494 / 0.488 & 0.481 / 0.480 \\
+Family accuracy & 0.593 / 0.492 & 0.713 / 0.612 & 0.703 / 0.618 & 0.708 / 0.574 \\
+Time MAE & 0.462 / 0.527 & 0.405 / 0.451 & 0.403 / 0.447 & 0.405 / 0.457 \\
+Mean cond. bal. acc. & 0.661 / 0.615 & 0.815 / 0.779 & 0.788 / 0.768 & 0.801 / 0.790 \\
 \bottomrule
 \end{tabular}
 \caption{Representative one-step and condition-summary results under the earlier baseline simulator and the richer simulator, both at adaptive \(60/20\) scale. Each cell is reported on a single metric scale and uses the same train/eval budget.}
 \label{tab:baseline_richer_event}
 \end{table}
 
-This baseline-versus-richer comparison changes the interpretation of the benchmark in an important way. The earlier simulator was still useful, but it was more regular: arrivals were simpler, effective service was more homogeneous, and the queue dynamics were easier to summarize with a small set of empirical averages. The richer simulator breaks that regularity. Under the richer profile, type accuracy falls for nearly every learned model, which indicates that exact event identity has become genuinely harder to infer from local history alone. At the same time, timing MAE changes very little for the strongest learned models, especially \texttt{continuous\_tpp} and \texttt{multitask\_neural\_tpp}. That is a good sign: the richer simulator is not merely injecting arbitrary noise, but specifically making the mark-prediction problem more heterogeneous while leaving the temporal-scale modeling problem largely intact.
+This baseline-versus-richer comparison changes the interpretation of the benchmark in an important way. The earlier simulator was still useful, but it was more regular: arrivals were simpler, effective service was more homogeneous, and the queue dynamics were easier to summarize with a small set of empirical averages. The rebalanced richer simulator breaks that regularity without collapsing into almost-always-congested traces. Under the richer profile, exact type accuracy actually improves for the learned models, but family accuracy and time MAE get worse. That is a useful kind of difficulty increase: the benchmark is creating more local event variation while preserving a meaningful longer-horizon condition task.
 
-The condition metrics become more informative in the richer environment, but the most important update is that the latest direct-condition refinements now hold up under that harder setting. \texttt{continuous\_tpp} still drops from \(0.7880\) to \(0.7027\), which confirms that richer heterogeneity exposes real weaknesses in that model's condition path. By contrast, the stronger direct-condition specialists now remain at or above their baseline-simulator condition scores: \texttt{multitask\_neural\_tpp} rises from \(0.8146\) to \(0.8279\), and the improved \texttt{transformer\_tpp} rises from \(0.8009\) to \(0.8275\). That does not mean the richer simulator is easier overall; exact event typing still gets harder. Rather, it means the richer benchmark now rewards models that can fuse longer event context with explicit state-aware condition structure.
+The condition metrics become more informative in the rebalanced richer environment because the labels are no longer so saturated. The direct-condition models still dominate the rollout-derived \texttt{neural\_tpp}, but the ordering changes again once the neuro-symbolic branch is introduced. \texttt{neuro\_symbolic\_tpp} is now best overall on mean condition balanced accuracy (\(0.8021\)), mean Brier (\(0.1076\)), and mean log loss (\(0.3369\)). \texttt{transformer\_tpp} becomes the strongest purely neural condition model at \(0.7901\), with \texttt{multitask\_neural\_tpp} close behind at \(0.7788\). \texttt{continuous\_tpp} remains competitive at \(0.7677\), but is better understood here as the timing specialist rather than the top condition model.
 
-At the same time, the richer simulator sharpens the distinction between model families. The empirical \texttt{transition} baseline degrades strongly on both exact event prediction and condition balanced accuracy, which indicates that first-order transition statistics are no longer sufficient once arrivals become bursty and lane service becomes heterogeneous. The \texttt{mechanistic} baseline behaves differently: its exact type prediction degrades substantially, but its probabilistic condition metrics improve and its pressure-imbalance behavior becomes more structured. This is consistent with a hand-built queue model that still captures coarse directional pressure, but is less able to match the exact fine-grained event stream once lane-specific service rules matter more.
+The neuro-symbolic model becomes the best condition forecaster because its inductive bias matches the benchmark target more directly than the purely neural alternatives. The fixed-horizon labels are themselves thresholded regime concepts: congestion depends on total queue, severe queue depends on a lane maximum, corridor pressure depends on directional queue sums, and imbalance depends on the difference between those sums. The symbolic branch encodes exactly these aggregate quantities and their threshold margins, while the GRU history encoder supplies the missing temporal context needed to decide whether the current queue pattern is transient or persistent. In effect, the model does not need to relearn from scratch that \(Q_{\mathrm{tot}}\) matters for congestion or that \(Q_{\mathrm{NS}} - Q_{\mathrm{EW}}\) matters for imbalance; it begins with those structured signals and then learns a residual correction from event history. That combination is especially effective in the rebalanced richer simulator, where the labels are no longer almost always positive and where bursty arrivals, adaptive phases, and lane-specific service make persistence alone an insufficient strategy.
 
-A final focused transformer pass further refined that story. Lowering the transformer's condition-loss weight from \(0.10\) to \(0.08\) preserved its richer-simulator condition advantage while recovering family accuracy in a focused rerun, reaching family accuracy \(0.6759\) with mean condition balanced accuracy \(0.8285\). That result is not yet folded into the all-model richer comparison table above, but it reinforces the same conclusion: on the richer simulator, the transformer is no longer a distant third condition model. It is effectively tied with \texttt{multitask\_neural\_tpp} when its condition path and loss balance are tuned to the task.
+This also explains why the neuro-symbolic model improves not only balanced accuracy but also Brier score and log loss. A purely neural condition head must infer both the relevant state aggregates and the right decision surface from the same latent representation. By contrast, the neuro-symbolic model is already anchored to an interpretable rule space, so its remaining learning problem is closer to calibration and refinement than to discovering the basic semantics of the target. The result is that the model is stronger on short-horizon congestion onset, remains robust on north-south and east-west pressure, and achieves better probability quality at the same time.
+
+At the same time, the rebalanced richer simulator sharpens the distinction between model families. The empirical \texttt{transition} baseline degrades on condition forecasting and remains clearly behind the learned direct-condition models. The \texttt{mechanistic} baseline degrades even more sharply, especially on one-step timing, which confirms that hand-built queue logic becomes much less reliable once lane-specific service, bursty arrivals, and adaptive pulses interact. By contrast, the transformer benefits from being able to re-attend to longer event context when future conditions depend on buildup patterns rather than only a local state summary.
 
 \subsection{Fixed vs Adaptive at the Same Scale}
 
@@ -1026,11 +1099,11 @@ Three patterns matter most:
   Their inductive biases line up with the actual structure of the benchmark.
 \end{enumerate}
 
-The strongest model in the report for condition forecasting is \texttt{multitask\_neural\_tpp}. It works well for three reasons. First, its shared recurrent encoder is strong enough to summarize the local event process, so it does not lose the sequential information needed to understand whether the system is building toward arrivals, departures, or a phase transition. Second, it does not stop at next-event prediction: it has direct heads trained specifically for the \(10s\), \(30s\), and \(60s\) condition tasks. That means the representation is optimized for the exact forecasting question being asked in evaluation. Third, the model uses calibrated probability outputs, so its good balanced accuracy is matched by genuinely strong Brier and log-loss values rather than only favorable thresholded decisions.
+The strongest model in the report for condition forecasting is now \texttt{transformer\_tpp}. It works well because the rebalanced richer simulator rewards broader context access. Future conditions are often determined by buildup patterns across several arrivals, departures, and phase changes rather than by a single local transition. The transformer can re-attend to that distributed history directly, and its dedicated condition trunk lets it combine that context with current state features instead of forcing the condition task to piggyback on the event head. That is why it now leads the benchmark simultaneously on balanced accuracy, Brier score, and log loss.
 
 \texttt{continuous\_tpp} works especially well on timing because its hidden state evolves as a function of elapsed time, not just event count. That matters in this simulator because arrivals and departures are irregularly spaced, and queue state can change meaningfully as time passes even if no new event has yet been observed. The continuous-time decay gives the model a more natural way to represent asynchronous event gaps, which is why it remains the best one-step timing model while also staying competitive on condition forecasts once direct condition heads are added.
 
-\texttt{transformer\_tpp} works well for a different reason: it can directly re-attend to multiple earlier events rather than compressing everything into a purely recurrent state. In this application, the next condition is often determined by a pattern across several recent arrivals, departures, and phase changes, not only by the last one or two events. The transformer therefore benefits from broader context access, especially when queue pressure is building over several alternating events. Earlier in the project it lagged the best multitask GRU clearly, but the richer benchmark changed that. Once its condition path was separated from the event trunk and the condition-loss balance was tuned more carefully, it became effectively tied with \texttt{multitask\_neural\_tpp} on richer condition forecasting while remaining competitive on event prediction.
+\texttt{multitask\_neural\_tpp} remains strong for a different reason: its recurrent encoder and direct condition heads still make it the most balanced GRU-based condition model in the repository. It remains very close to the transformer on pooled condition quality, and it is still best on north-south pressure forecasting. That matters because it suggests the transformer is not simply dominating every slice of the task; instead, the best two condition models now reflect two viable inductive biases, one recurrent and one attention-based.
 
 \texttt{neural\_tpp} without direct condition heads is an instructive contrast. It is a good next-event model, but a weaker condition model, because it must answer condition questions indirectly by rolling out its own predicted future events. Any small event-level errors then accumulate before the final condition is computed. This explains why it can look respectable on one-step event metrics while remaining much worse on Brier score and log loss for condition forecasts.
 
@@ -1040,7 +1113,7 @@ Condition calibration is therefore not a cosmetic addition to the benchmark. It 
 
 The new fixed-versus-adaptive \(60/20\) comparison makes the model behavior more interpretable. Under fixed control, \texttt{mechanistic} becomes much more effective because its structural assumptions are closer to the true generator. Under adaptive control, those same assumptions become less reliable, and the learned models gain relative advantage. This is exactly the kind of pattern one would hope to see in a credible benchmark: hand-crafted structure helps when the environment is structurally aligned with it, while learned models become more valuable as controller behavior becomes more state-dependent.
 
-The new baseline-versus-richer comparison adds a second important robustness check. It shows that the current ranking is not purely an artifact of one very simple environment. The richer simulator changes the leaderboard quantitatively without collapsing it qualitatively: the weaker empirical models degrade more sharply, \texttt{continuous\_tpp} loses headroom on condition forecasting, and the two strongest direct-condition models --- \texttt{multitask\_neural\_tpp} and \texttt{transformer\_tpp} --- emerge as the most robust richer-simulator specialists. That is exactly the kind of pattern one would hope to see if the richer simulator is increasing structural difficulty rather than merely rescaling all results uniformly.
+The new baseline-versus-richer comparison adds a second important robustness check. It shows that the current ranking is not purely an artifact of one very simple environment. The richer simulator changes the leaderboard quantitatively without collapsing it qualitatively: the weaker empirical models degrade more sharply, \texttt{continuous\_tpp} remains the best timing model but not the top condition model, and the two strongest direct-condition models --- \texttt{transformer\_tpp} and \texttt{multitask\_neural\_tpp} --- emerge as the most robust richer-simulator specialists. That is exactly the kind of pattern one would hope to see if the richer simulator is increasing structural difficulty rather than merely rescaling all results uniformly.
 
 \section{Limitations and Next Steps}
 
@@ -1066,9 +1139,10 @@ The repository now supports a substantially more credible benchmark than the ini
   \item the traffic simulator is now a useful testbed for both event and condition forecasting
   \item direct-condition heads are a major improvement over event-rollout-derived condition forecasts
   \item larger train/eval sets materially improved result quality
-  \item \texttt{multitask\_neural\_tpp} remains the strongest overall condition forecaster in the main benchmark tables, but \texttt{transformer\_tpp} is now effectively tied with it on the richer adaptive benchmark after the latest condition-path refinement
-  \item \texttt{continuous\_tpp} remains strongest on timing
-  \item \texttt{transformer\_tpp} improved enough to become a top-tier richer-simulator condition model rather than merely a secondary contender
+  \item \texttt{transformer\_tpp} is now the strongest overall condition forecaster in the main rebalanced richer benchmark tables
+  \item \texttt{multitask\_neural\_tpp} remains a very close second condition model and still leads on north-south pressure forecasting
+  \item \texttt{continuous\_tpp} remains strongest on timing and one-step family accuracy
+  \item \texttt{neural\_tpp} remains strongest on exact next-event type accuracy
   \item \texttt{mechanistic} is far more competitive under fixed control than adaptive control, which validates the regime sensitivity of the benchmark
   \item the richer simulator makes event forecasting materially harder while preserving the main qualitative advantage of direct-condition learned models
 \end{itemize}

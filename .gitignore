@@ -1,7 +1,15 @@
 .venv/
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 .DS_Store
+.coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
 
 analysis/cache*/
 analysis/*_smoke/
@@ -9,9 +17,26 @@ analysis/*_eval/
 analysis/*_runtime*/
 analysis/*_colab*/
 analysis/*_60_20*/
+analysis/*_full/
+analysis/*_full_v2/
+analysis/*_learned/
+analysis/*_learned_only/
+analysis/*_only/
+analysis/*_tuned*/
+analysis/*_updated/
+analysis/*_refined/
+analysis/*_rebalanced*/
 analysis/fixed/
 analysis/adaptive/
 analysis/model_comparison/
+analysis/*.html
+analysis/*.json
+analysis/*.zip
+analysis/**/*.html
+analysis/**/*.json
+analysis/**/*.pt
+analysis/**/*.zip
+analysis/**/*.log
 output/
 
 latex/technical_report/*.aux
@@ -19,6 +44,7 @@ latex/technical_report/*.fdb_latexmk
 latex/technical_report/*.fls
 latex/technical_report/*.log
 latex/technical_report/*.out
+latex/technical_report/*.pdf
 latex/technical_report/*.toc
 latex/technical_report/*.synctex.gz
 

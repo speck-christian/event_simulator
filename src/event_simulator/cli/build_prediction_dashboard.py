@@ -5,6 +5,13 @@ import json
 from pathlib import Path
 
 from event_simulator.evaluation.prediction_dashboard import build_prediction_dashboard_html
+from event_simulator.models import (
+    ContinuousTPPBaseline,
+    MultitaskNeuralTPPBaseline,
+    NeuralTPPBaseline,
+    NeuroSymbolicTPPBaseline,
+    TransformerTPPBaseline,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -30,8 +37,40 @@ def main() -> None:
     example_run = next((run for run in runs if int(run["seed"]) == int(report["example_seed"])), None)
     if example_run is None:
         raise SystemExit(f"Could not find example seed {report['example_seed']} in {runs_path}")
+    eval_runs = runs[int(report["train_runs"]) :]
+    available_model_names = set(report["models"].keys() if isinstance(report["models"], dict) else [])
+    checkpoint_dir = report_path.with_name("checkpoints")
+    model_instances = {}
+    for name in available_model_names:
+        if name == "neural_tpp":
+            checkpoint_path = checkpoint_dir / "neural_tpp.pt"
+            if checkpoint_path.exists():
+                model_instances[name] = NeuralTPPBaseline.load_checkpoint(checkpoint_path)
+        elif name == "multitask_neural_tpp":
+            checkpoint_path = checkpoint_dir / "multitask_neural_tpp.pt"
+            if checkpoint_path.exists():
+                model_instances[name] = MultitaskNeuralTPPBaseline.load_checkpoint(checkpoint_path)
+        elif name == "continuous_tpp":
+            checkpoint_path = checkpoint_dir / "continuous_tpp.pt"
+            if checkpoint_path.exists():
+                model_instances[name] = ContinuousTPPBaseline.load_checkpoint(checkpoint_path)
+        elif name == "transformer_tpp":
+            checkpoint_path = checkpoint_dir / "transformer_tpp.pt"
+            if checkpoint_path.exists():
+                model_instances[name] = TransformerTPPBaseline.load_checkpoint(checkpoint_path)
+        elif name == "neuro_symbolic_tpp":
+            checkpoint_path = checkpoint_dir / "neuro_symbolic_tpp.pt"
+            if checkpoint_path.exists():
+                model_instances[name] = NeuroSymbolicTPPBaseline.load_checkpoint(checkpoint_path)
     output_path = Path(args.output) if args.output else report_path.with_name("traffic_predictions.html")
-    output_path.write_text(build_prediction_dashboard_html(report, example_run, cached_runs=runs))
+    output_path.write_text(
+        build_prediction_dashboard_html(
+            report,
+            example_run,
+            cached_runs=eval_runs,
+            model_instances=model_instances,
+        )
+    )
     print(str(output_path))
 
 

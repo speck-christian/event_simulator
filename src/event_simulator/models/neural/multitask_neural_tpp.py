@@ -126,7 +126,13 @@ class MultitaskNeuralTPPBaseline(LearnedTPPBaseline):
         pos_weight = (neg_counts / pos_counts.clamp(min=1.0)).clamp(min=0.5, max=8.0).to(self.runtime_device)
         condition_loss_fn = nn.BCEWithLogitsLoss(reduction="none", pos_weight=pos_weight)
         self.model.train()
-        for _ in range(self.epochs):
+        self.training_log(
+            f"starting fit epochs={self.epochs} batches_per_epoch={len(loader)} device={self.runtime_device}"
+        )
+        for epoch_index in range(self.epochs):
+            epoch_start = self.training_epoch_start()
+            epoch_loss_sum = 0.0
+            batch_count = 0
             for batch in loader:
                 batch = self.move_batch_to_device(batch, self.runtime_device)
                 optimizer.zero_grad()
@@ -140,6 +146,14 @@ class MultitaskNeuralTPPBaseline(LearnedTPPBaseline):
                 loss.backward()
                 torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
                 optimizer.step()
+                epoch_loss_sum += float(loss.detach().item())
+                batch_count += 1
+            self.training_epoch_end(
+                epoch_index + 1,
+                self.epochs,
+                epoch_start,
+                epoch_loss_sum / max(1, batch_count),
+            )
         self.model.eval()
         self.condition_scalers, self.condition_thresholds = self.tune_condition_calibration(threshold_loader)
 

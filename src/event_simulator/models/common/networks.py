@@ -66,6 +66,55 @@ class GRUMultitaskTPPModel(nn.Module):
         return self.label_head(trunk), self.delta_head(trunk).squeeze(-1), self.condition_head(trunk)
 
 
+class NeuroSymbolicTPPModel(nn.Module):
+    def __init__(self, vocab_size: int, state_dim: int, symbolic_dim: int, hidden_dim: int, embedding_dim: int, condition_dim: int) -> None:
+        super().__init__()
+        self.state_dim = state_dim
+        self.symbolic_dim = symbolic_dim
+        self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx=0)
+        self.gru = nn.GRU(input_size=embedding_dim + 1, hidden_size=hidden_dim, batch_first=True)
+        self.event_trunk = nn.Sequential(
+            nn.Linear(hidden_dim + state_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+        )
+        self.symbolic_encoder = nn.Sequential(
+            nn.Linear(symbolic_dim, hidden_dim),
+            nn.Tanh(),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.Tanh(),
+        )
+        self.label_head = nn.Linear(hidden_dim, vocab_size)
+        self.delta_head = nn.Linear(hidden_dim, 1)
+        self.symbolic_rule_head = nn.Linear(symbolic_dim, condition_dim, bias=False)
+        self.condition_residual = nn.Sequential(
+            nn.Linear(hidden_dim * 2 + state_dim + symbolic_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, condition_dim),
+        )
+
+    def forward(
+        self,
+        labels: torch.Tensor,
+        deltas: torch.Tensor,
+        lengths: torch.Tensor,
+        state_features: torch.Tensor,
+        symbolic_features: torch.Tensor,
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        embedded = self.embedding(labels)
+        delta_feature = torch.log1p(deltas).unsqueeze(-1)
+        packed = pack_padded_sequence(torch.cat([embedded, delta_feature], dim=-1), lengths.cpu(), batch_first=True, enforce_sorted=False)
+        _, hidden = self.gru(packed)
+        hidden = hidden[-1]
+        event_trunk = self.event_trunk(torch.cat([hidden, state_features], dim=-1))
+        symbolic_hidden = self.symbolic_encoder(symbolic_features)
+        condition_logits = self.symbolic_rule_head(symbolic_features) + self.condition_residual(
+            torch.cat([event_trunk, symbolic_hidden, state_features, symbolic_features], dim=-1)
+        )
+        return self.label_head(event_trunk), self.delta_head(event_trunk).squeeze(-1), condition_logits
+
+
 class ContinuousLSTMNextEventModel(nn.Module):
     def __init__(self, vocab_size: int, state_dim: int, hidden_dim: int, embedding_dim: int) -> None:
         super().__init__()
