@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 import time
+import traceback
 
 from event_simulator.evaluation import (
     build_dashboard_html,
@@ -50,6 +51,11 @@ def parse_args() -> argparse.Namespace:
         "--models",
         default="neural_tpp,multitask_neural_tpp,continuous_tpp,transformer_tpp,neuro_symbolic_tpp",
         help="Comma-separated learned model names to run. Options: neural_tpp,multitask_neural_tpp,continuous_tpp,transformer_tpp,neuro_symbolic_tpp",
+    )
+    parser.add_argument(
+        "--skip-prediction-dashboard",
+        action="store_true",
+        help="Skip building traffic_predictions.html. Useful when you only need checkpoints and aggregate metrics.",
     )
     return parser.parse_args()
 
@@ -151,16 +157,7 @@ def main() -> None:
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "model_comparison.json").write_text(json.dumps(report, indent=2) + "\n")
     (output_dir / "model_comparison.html").write_text(build_dashboard_html(report))
-    dashboard_models = {name: available_models[name] for name in selected_names}
-    (output_dir / "traffic_predictions.html").write_text(
-        build_prediction_dashboard_html(
-            report,
-            eval_runs[0],
-            cached_runs=runs,
-            model_instances=dashboard_models,
-        )
-    )
-    print(f"[train_learned] wrote reports to {output_dir}", flush=True)
+    print(f"[train_learned] wrote aggregate comparison reports to {output_dir}", flush=True)
     checkpoint_manifest: dict[str, str] = {}
     for name in selected_names:
         model = available_models[name]
@@ -184,6 +181,28 @@ def main() -> None:
         "checkpoints": checkpoint_manifest,
     }
     (output_dir / "runtime_summary.json").write_text(json.dumps(runtime_report, indent=2) + "\n")
+    print(f"[train_learned] wrote runtime summary to {output_dir / 'runtime_summary.json'}", flush=True)
+    if args.skip_prediction_dashboard:
+        print("[train_learned] skipped traffic_predictions.html by request", flush=True)
+    else:
+        try:
+            dashboard_models = {name: available_models[name] for name in selected_names}
+            (output_dir / "traffic_predictions.html").write_text(
+                build_prediction_dashboard_html(
+                    report,
+                    eval_runs[0],
+                    cached_runs=runs,
+                    model_instances=dashboard_models,
+                )
+            )
+            print(f"[train_learned] wrote traffic_predictions.html to {output_dir}", flush=True)
+        except Exception:
+            error_text = traceback.format_exc()
+            (output_dir / "traffic_predictions_error.txt").write_text(error_text)
+            print(
+                f"[train_learned] prediction dashboard failed; wrote {output_dir / 'traffic_predictions_error.txt'}",
+                flush=True,
+            )
     print(
         json.dumps(
             {
